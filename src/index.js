@@ -66,94 +66,94 @@ const user = {
 // <!-- Section 4 : API Routes -->
 // *****************************************************
 
-// app.get('/', (req, res) => {
-//     res.redirect('/login');
-// });
+app.get('/', (req, res) => {
+    res.redirect('/login');
+});
   
-// app.get('/login', (req, res) => {
-//     res.render("pages/login");
-// });
+app.get('/login', (req, res) => {
+    res.render("pages/login");
+});
 
-// app.post('/login', async (req, res) => {
-//     const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
+app.post('/login', async (req, res) => {
+    const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
 
-//     db.task('get-everything', async task => {
-//       return task.any(access);
-//     })
-//       .then(async data => {
-//         if (await bcrypt.compare(req.body.password, data[0].password)) {
-//           user.username = data[0].username;
-//           user.password = data[0].password;
-//           req.session.user = user;
-//           req.session.save();
-//           res.redirect('/discover');
-//         } else {
-//           res.locals.message = 'Incorrect username or password.';
-//           res.render("pages/login");
-//         }
-//       })
-//       .catch(err => {
-//         res.redirect('/register');
-//       });
-// });
+    db.task('get-everything', async task => {
+      return task.any(access);
+    })
+      .then(async data => {
+        if (await bcrypt.compare(req.body.password, data[0].password)) {
+          user.username = data[0].username;
+          user.password = data[0].password;
+          req.session.user = user;
+          req.session.save();
+          res.redirect('/discover');
+        } else {
+          res.locals.message = 'Incorrect username or password.';
+          res.render("pages/login");
+        }
+      })
+      .catch(err => {
+        res.redirect('/register');
+      });
+});
 
-// app.get('/register', (req, res) => {
-//     res.render('pages/register');
-// });
+app.get('/register', (req, res) => {
+    res.render('pages/register');
+});
 
-// app.post('/register', async (req, res) => {
-//     const username = req.body.username;
-//     const password = await bcrypt.hash(req.body.password, 10);
-//     const insert = `INSERT INTO users (username, password) VALUES ('${username}', '${password}');`;
+app.post('/register', async (req, res) => {
+    const username = req.body.username;
+    const password = await bcrypt.hash(req.body.password, 10);
+    const insert = `INSERT INTO users (username, password) VALUES ('${username}', '${password}');`;
 
-//     db.task('get-everything', task => {
-//         return task.any(insert);
-//     })
-//         .then(data => {
-//           res.redirect('/login');
-//         })
-//         .catch(err => {
-//           res.redirect('/register');
-//         });
-// });
+    db.task('get-everything', task => {
+        return task.any(insert);
+    })
+        .then(data => {
+          res.redirect('/login');
+        })
+        .catch(err => {
+          res.redirect('/register');
+        });
+});
 
-// const auth = (req, res, next) => {
-//   if (!req.session.user) {
-//     return res.redirect('/login');
-//   }
-//   next();
-// };
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+  next();
+};
 
-// app.get('/discover', (req, res) => {
-//   axios({
-//     url: `https://app.ticketmaster.com/discovery/v2/events.json`,
-//     method: 'GET',
-//     dataType: 'json',
-//     headers: {
-//       'Accept-Encoding': 'application/json',
-//     },
-//     params: {
-//       apikey: process.env.API_KEY,
-//       keyword: 'Taylor Swift',
-//       size: 12,
-//     },
-//   })
-//     .then(results => {
-//       res.render('pages/discover', {results});
-//     })
-//     .catch(error => {
-//       res.send("results: [] " + error);
-//     });
-// });
+app.get('/discover', (req, res) => {
+  axios({
+    url: `https://app.ticketmaster.com/discovery/v2/events.json`,
+    method: 'GET',
+    dataType: 'json',
+    headers: {
+      'Accept-Encoding': 'application/json',
+    },
+    params: {
+      apikey: process.env.API_KEY,
+      keyword: 'Taylor Swift',
+      size: 12,
+    },
+  })
+    .then(results => {
+      res.render('pages/discover', {results});
+    })
+    .catch(error => {
+      res.send("results: [] " + error);
+    });
+});
 
-// app.get('/logout', (req, res) => {
-//   user.username = undefined;
-//   user.password = undefined;
-//   req.session.user = user;
-//   req.session.save();
-//   res.locals.message = 'Logged out successfully';
-//   res.render("pages/login");
-// });
+app.get('/logout', (req, res) => {
+  user.username = undefined;
+  user.password = undefined;
+  req.session.user = user;
+  req.session.save();
+  res.locals.message = 'Logged out successfully';
+  res.render("pages/login");
+});
 
 app.get('/welcome', (req, res) => {
     res.json({status: 'success', message: 'Welcome!'});

@@ -1,0 +1,23 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
+
+<main>
+    <div class="container">
+      <h1>Login</h1>          
+      <form action="/login" method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control"/>
+  
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control"/>
+  
+          <hr>
+          <p>
+            Don't have an account?
+            <a href="\register">Register</a>
+            <input type="submit" value="Login" class="btn btn-primary" style="float:right;"/>
+          </p>
+        </form>
+        <div class="col"><%- include ('../partials/message') %></div>
+    </div>
+</main>
