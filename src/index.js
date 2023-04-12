@@ -124,28 +124,6 @@ const auth = (req, res, next) => {
   next();
 };
 
-app.get('/discover', (req, res) => {
-  axios({
-    url: `https://app.ticketmaster.com/discovery/v2/events.json`,
-    method: 'GET',
-    dataType: 'json',
-    headers: {
-      'Accept-Encoding': 'application/json',
-    },
-    params: {
-      apikey: process.env.API_KEY,
-      keyword: 'Taylor Swift',
-      size: 12,
-    },
-  })
-    .then(results => {
-      res.render('pages/discover', {results});
-    })
-    .catch(error => {
-      res.send("results: [] " + error);
-    });
-});
-
 app.get('/logout', (req, res) => {
   user.username = undefined;
   user.password = undefined;
@@ -163,7 +141,7 @@ app.get('/welcome', (req, res) => {
 // <!-- Section 5 : Start Server-->
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
-// module.exports = app.listen(3000);
-app.listen(3000);
+module.exports = app.listen(3000);
+// app.listen(3000);
 console.log('Server is listening on port 3000');
 
