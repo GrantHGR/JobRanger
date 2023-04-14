@@ -27,9 +27,10 @@ CREATE TABLE users_to_educations(
 );
 
 DROP TABLE IF EXISTS experiences CASCADE;
-CREATE TABLE education(
+CREATE TABLE experiences(
     id SERIAL PRIMARY KEY,
     organization VARCHAR(50) NOT NULL,
+    title VARCHAR(50) NOT NULL,
     startdate DATE NOT NULL,
     endDate DATE NOT NULL
 );
@@ -37,7 +38,7 @@ CREATE TABLE education(
 DROP TABLE IF EXISTS descriptions CASCADE;
 CREATE TABLE descriptions(
     id SERIAL PRIMARY KEY,
-    description VARCHAR(1000)
+    description VARCHAR(1000) NOT NULL
 );
 
 DROP TABLE IF EXISTS description_to_experience CASCADE;
@@ -59,7 +60,7 @@ CREATE TABLE user_to_experience(
 DROP TABLE IF EXISTS skills CASCADE;
 CREATE TABLE skills(
     id SERIAL PRIMARY KEY,
-    skill VARCHAR(50)
+    skill VARCHAR(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS user_to_skill CASCADE;
@@ -73,7 +74,7 @@ CREATE TABLE user_to_skill(
 DROP TABLE IF EXISTS languages CASCADE;
 CREATE TABLE languages(
     id SERIAL PRIMARY KEY,
-    language VARCHAR(50)
+    language VARCHAR(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS user_to_language CASCADE;
@@ -82,4 +83,19 @@ CREATE TABLE user_to_language(
     language_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (language_id) REFERENCES languages (id)
+);
+
+DROP TABLE IF EXISTS locations CASCADE;
+CREATE TABLE locations(
+    id SERIAL PRIMARY KEY,
+    country VARCHAR(50),
+    city VARCHAR(50)
+);
+
+DROP TABLE IF EXISTS user_to_location CASCADE;
+CREATE TABLE user_to_location(
+    user_id INT NOT NULL,
+    location_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (location_id) REFERENCES locations (id)
 );
