@@ -5,7 +5,9 @@ CREATE TABLE users(
     lastname VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     dob DATE NOT NULL,
-    email VARCHAR(50) NOT NULL
+    email VARCHAR(100) NOT NULL,
+    linkedin VARCHAR(100),
+    github VARCHAR(100)
 );
 
 DROP TABLE IF EXISTS educations CASCADE;
@@ -41,8 +43,8 @@ CREATE TABLE descriptions(
     description VARCHAR(1000) NOT NULL
 );
 
-DROP TABLE IF EXISTS description_to_experience CASCADE;
-CREATE TABLE description_to_experience(
+DROP TABLE IF EXISTS experience_to_description CASCADE;
+CREATE TABLE experience_to_description(
     experience_id INT NOT NULL,
     description_id INT NOT NULL,
     FOREIGN KEY (experience_id) REFERENCES experiences (id),
