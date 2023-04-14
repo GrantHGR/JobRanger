@@ -137,11 +137,110 @@ app.get('/welcome', (req, res) => {
     res.json({status: 'success', message: 'Welcome!'});
 });
 
+
+
+
+
+app.post('/info/addGeneral', (req, res) => {
+  
+});
+
+app.post('/info/addEducation', (req, res) => {
+  
+});
+
+app.delete('/info/rmEducation', (req, res) => {
+  
+});
+
+app.post('/info/addEducationDescription', (req, res) => {
+  
+});
+
+app.delete('/info/rmEducationDescription', (req, res) => {
+  
+});
+
+app.post('/info/addExperience', (req, res) => {
+  
+});
+
+app.delete('/info/rmExperience', (req, res) => {
+  
+});
+
+app.post('/info/addExperienceDescription', (req, res) => {
+  
+});
+
+app.delete('/info/rmExperienceDescription', (req, res) => {
+  
+});
+
+app.post('/info/addSkill', (req, res) => {
+  const insert = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${user.username}')`;
+
+  db.task('get-everything', task => {
+    return task.any(insert);
+  })
+    .then(data => {
+      res.render("pages/info");
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to add skill",
+      });
+    });
+});
+
+app.delete('/info/rmSkill', (req, res) => {
+  
+});
+
+app.post('/info/addLanguage', (req, res) => {
+  const insert = `INSERT INTO languages (language, proficiency, username) VALUES ('${req.body.language}', '${req.body.proficiency}', '${user.username}')`;
+
+  db.task('get-everything', task => {
+    return task.any(insert);
+  })
+    .then(data => {
+      res.render("pages/info");
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to add language",
+      });
+    });
+});
+
+app.delete('/info/rmLanguage', (req, res) => {
+  
+});
+
+app.post('/info/addLocation', (req, res) => {
+  const insert = `INSERT INTO locations (country, city, username) VALUES ('${req.body.country}', '${req.body.city}', '${user.username}')`;
+
+  db.task('get-everything', task => {
+    return task.any(insert);
+  })
+    .then(data => {
+      res.render("pages/info");
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to add location",
+      });
+    });
+});
+
+app.delete('/info/rmLocation', (req, res) => {
+  
+});
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
-module.exports = app.listen(3000);
-// app.listen(3000);
+// module.exports = app.listen(3000);
+app.listen(3000);
 console.log('Server is listening on port 3000');
-
