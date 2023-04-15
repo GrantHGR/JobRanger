@@ -17,7 +17,7 @@ CREATE TABLE general(
 );
 
 DROP TABLE IF EXISTS educations CASCADE;
-CREATE TABLE education(
+CREATE TABLE educations(
     id SERIAL PRIMARY KEY,
     school VARCHAR(50) NOT NULL,
     degree VARCHAR(50) NOT NULL,
