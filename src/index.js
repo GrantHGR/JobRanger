@@ -124,6 +124,10 @@ const auth = (req, res, next) => {
   next();
 };
 
+app.get('/info', (req, res) => {
+  res.render('pages/info');
+});
+
 app.get('/logout', (req, res) => {
   user.username = undefined;
   user.password = undefined;
