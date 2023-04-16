@@ -12,7 +12,7 @@ describe('Register!', () => {
       chai
         .request(server)
         .post('/register')
-        .send({id: 5, name: 'John Doe', dob: '2020-02-20'})
+        .send({id: '5', username: 'JohnDoe123', password: 'p00py'})
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equals('Success');
@@ -23,7 +23,7 @@ describe('Register!', () => {
     chai
       .request(server)
       .post('/register')
-      .send({id: '5', name: 10, dob: '2020-02-20'})
+      .send({id: '5', username: 10, password: 10})
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.equals('Invalid input');
@@ -31,3 +31,28 @@ describe('Register!', () => {
       });
   });
 });
+
+describe('Add Skill', () => {
+  it('positive : /addSkill', done => {
+    chai
+      .request(server)
+      .post('/addSkill')
+      .send({id: '1', skill: 'Hustle Pool'})
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Success');
+        done();
+      });
+  })
+  it('Negative : /addSkill. Checking invalid input', done => {
+    chai
+      .request(server)
+      .post('/addSkill')
+      .send({id: '1', skill: 55})
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Invalid input');
+        done();
+      });
+  });
+}); 

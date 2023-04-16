@@ -128,6 +128,7 @@ app.get('/info', (req, res) => {
   res.render('pages/info');
 });
 
+
 app.get('/logout', (req, res) => {
   user.username = undefined;
   user.password = undefined;
@@ -146,11 +147,35 @@ app.get('/welcome', (req, res) => {
 
 
 app.post('/info/addGeneral', (req, res) => {
-  
+  const insert = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) VALUES ('${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}' ,'${user.username}')`;
+
+  db.task('get-everything', task => {
+    return task.any(insert);
+  })
+    .then(data => {
+      res.render("pages/info");
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to add genreal information",
+      });
+    });
 });
 
 app.post('/info/addEducation', (req, res) => {
-  
+  const insert = `INSERT INTO educations (school, degree, focus, startdate, endDate, username) VALUES ('${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}','${user.username}')`;
+
+  db.task('get-everything', task => {
+    return task.any(insert);
+  })
+    .then(data => {
+      res.render("pages/info");
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to add education",
+      });
+    });
 });
 
 app.delete('/info/rmEducation', (req, res) => {
