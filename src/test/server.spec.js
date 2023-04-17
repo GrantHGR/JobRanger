@@ -12,11 +12,7 @@ describe('Register!', () => {
       chai
         .request(server)
         .post('/register')
-<<<<<<< HEAD
         .send({id: 5, username: 'test123', password: 'test234'})
-=======
-        .send({id: '5', username: 'JohnDoe123', password: 'p00py'})
->>>>>>> 327800373e61620c818d2ed708a900b415d875e3
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equals('Success');
@@ -27,7 +23,6 @@ describe('Register!', () => {
     chai
       .request(server)
       .post('/register')
-<<<<<<< HEAD
       .send({id: '5', username: '', dob: ''})
       .end((err, res) => {
         expect(res).to.have.status(200);
@@ -54,9 +49,6 @@ describe('login!', () => {
       .request(server)
       .post('/login')
       .send({id: '5', username: '', dob: ''})
-=======
-      .send({id: '5', username: 10, password: 10})
->>>>>>> 327800373e61620c818d2ed708a900b415d875e3
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.equals('Invalid input');
