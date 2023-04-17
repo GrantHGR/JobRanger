@@ -12,7 +12,7 @@ describe('Register!', () => {
       chai
         .request(server)
         .post('/register')
-        .send({id: 5, name: 'John Doe', dob: '2020-02-20'})
+        .send({id: 5, username: 'test123', password: 'test234'})
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equals('Success');
@@ -23,7 +23,32 @@ describe('Register!', () => {
     chai
       .request(server)
       .post('/register')
-      .send({id: '5', name: 10, dob: '2020-02-20'})
+      .send({id: '5', username: '', dob: ''})
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Invalid input');
+        done();
+      });
+  });
+});
+
+describe('login!', () => {
+  it('positive : /login', done => {
+      chai
+        .request(server)
+        .post('/login')
+        .send({id: 5, username: 'test123', password: 'test234'})
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body.message).to.equals('Success');
+          done();
+        });
+    })
+  it('Negative : /login. Checking invalid name', done => {
+    chai
+      .request(server)
+      .post('/login')
+      .send({id: '5', username: '', dob: ''})
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.equals('Invalid input');
