@@ -124,11 +124,6 @@ const auth = (req, res, next) => {
   next();
 };
 
-app.get('/info', (req, res) => {
-  res.render('pages/info');
-});
-
-
 app.get('/logout', (req, res) => {
   user.username = undefined;
   user.password = undefined;
@@ -138,38 +133,38 @@ app.get('/logout', (req, res) => {
   res.render("pages/login");
 });
 
-app.get('/welcome', (req, res) => {
-    res.json({status: 'success', message: 'Welcome!'});
+app.get('/info', (req, res) => {
+  res.render('pages/info');
 });
 
-
-
-
-
 app.post('/info/addGeneral', (req, res) => {
-  const insert = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) VALUES ('${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}' ,'${user.username}')`;
+  const add = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) VALUES ('${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}' ,'${user.username}') WHERE NOT EXISTS (SELECT * FROM general WHERE username = '${user.username}')`;
 
   db.task('get-everything', task => {
-    return task.any(insert);
+    return task.any(add);
   })
     .then(data => {
-      res.render("pages/info");
+      res.render("pages/info", {
+        message: "Succeeded to add general information",
+      });
     })
     .catch(err => {
       res.render("pages/info", {
-        message: "Failed to add genreal information",
+        message: "Failed to add general information",
       });
     });
 });
 
 app.post('/info/addEducation', (req, res) => {
-  const insert = `INSERT INTO educations (school, degree, focus, startdate, endDate, username) VALUES ('${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}','${user.username}')`;
+  const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, username) VALUES ('${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}','${user.username}')`;
 
   db.task('get-everything', task => {
-    return task.any(insert);
+    return task.any(add);
   })
     .then(data => {
-      res.render("pages/info");
+      res.render("pages/info", {
+        message: "Succeeded to add education",
+      });
     })
     .catch(err => {
       res.render("pages/info", {
@@ -191,6 +186,21 @@ app.delete('/info/rmEducationDescription', (req, res) => {
 });
 
 app.post('/info/addExperience', (req, res) => {
+  const add = `INSERT INTO experiences (organization, title, startdate, endDate, username) VALUES ('${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.endDate}','${user.username}')`;
+
+  db.task('get-everything', task => {
+    return task.any(add);
+  })
+    .then(data => {
+      res.render("pages/info", {
+        message: "Succeeded to add experience",
+      });
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to add experience",
+      });
+    });
   
 });
 
@@ -207,13 +217,15 @@ app.delete('/info/rmExperienceDescription', (req, res) => {
 });
 
 app.post('/info/addSkill', (req, res) => {
-  const insert = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${user.username}')`;
+  const add = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${user.username}') WHERE NOT EXISTS (SELECT * FROM skills WHERE skill = '${req.body.skill}')`;
 
   db.task('get-everything', task => {
-    return task.any(insert);
+    return task.any(add);
   })
     .then(data => {
-      res.render("pages/info");
+      res.render("pages/info", {
+        message: "Succeeded to add skill",
+      });
     })
     .catch(err => {
       res.render("pages/info", {
@@ -223,17 +235,33 @@ app.post('/info/addSkill', (req, res) => {
 });
 
 app.delete('/info/rmSkill', (req, res) => {
-  
+  const rm = `DELETE FROM skills WHERE skill = '${req.body.skill}' AND username = '${user.username}'`;
+
+  db.task('get-everything', task => {
+    return task.any(add);
+  })
+    .then(data => {
+      res.render("pages/info", {
+        message: "Succeeded to delete skill",
+      });
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to delete skill",
+      });
+    });
 });
 
 app.post('/info/addLanguage', (req, res) => {
-  const insert = `INSERT INTO languages (language, proficiency, username) VALUES ('${req.body.language}', '${req.body.proficiency}', '${user.username}')`;
+  const add = `INSERT INTO languages (language, proficiency, username) VALUES ('${req.body.language}', '${req.body.proficiency}', '${user.username}') WHERE NOT EXISTS (SELECT * FROM languages WHERE language = '${req.body.language}')`;
 
   db.task('get-everything', task => {
-    return task.any(insert);
+    return task.any(add);
   })
     .then(data => {
-      res.render("pages/info");
+      res.render("pages/info", {
+        message: "Succeeded to add language",
+      });
     })
     .catch(err => {
       res.render("pages/info", {
@@ -243,17 +271,33 @@ app.post('/info/addLanguage', (req, res) => {
 });
 
 app.delete('/info/rmLanguage', (req, res) => {
-  
+  const rm = `DELETE FROM languages WHERE language = '${req.body.language}' AND username = '${user.username}'`;
+
+  db.task('get-everything', task => {
+    return task.any(add);
+  })
+    .then(data => {
+      res.render("pages/info", {
+        message: "Succeeded to delete language",
+      });
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to delete language",
+      });
+    });  
 });
 
 app.post('/info/addLocation', (req, res) => {
-  const insert = `INSERT INTO locations (country, city, username) VALUES ('${req.body.country}', '${req.body.city}', '${user.username}')`;
+  const add = `INSERT INTO locations (country, city, username) VALUES ('${req.body.country}', '${req.body.city}', '${user.username}') WHERE NOT EXISTS (SELECT * FROM locations WHERE country = '${req.body.country}' AND '${req.body.city}')`;
 
   db.task('get-everything', task => {
-    return task.any(insert);
+    return task.any(add);
   })
     .then(data => {
-      res.render("pages/info");
+      res.render("pages/info", {
+        message: "Succeeded to add location",
+      });
     })
     .catch(err => {
       res.render("pages/info", {
@@ -263,7 +307,21 @@ app.post('/info/addLocation', (req, res) => {
 });
 
 app.delete('/info/rmLocation', (req, res) => {
-  
+  const rm = `DELETE FROM locations WHERE country = '${req.body.country}' AND city = '${req.body.city}' AND username = '${user.username}'`;
+
+  db.task('get-everything', task => {
+    return task.any(add);
+  })
+    .then(data => {
+      res.render("pages/info", {
+        message: "Succeeded to delete location",
+      });
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        message: "Failed to delete location",
+      });
+    });
 });
 
 // *****************************************************
