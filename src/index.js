@@ -89,7 +89,7 @@ app.post('/login', async (req, res) => {
 
           res.redirect(200, '/discover');
         } else {
-          // res.locals.message = 'Incorrect username or password.';
+          res.locals.message = 'Incorrect username or password.';
           res.status(200).render("pages/login");
         }
       })
@@ -135,7 +135,28 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/info', (req, res) => {
-  res.render('pages/info');
+  const getGeneral = `SELECT * FROM general WHERE username = '${user.username}'`;
+  const getEducations = `SELECT * FROM educations WHERE username = '${user.username}'`;
+  const getExperiences = `SELECT * FROM experiences WHERE username = '${user.username}'`;
+  const getSkills = `SELECT * FROM skills WHERE username = '${user.username}'`;
+  const getLanguages = `SELECT * FROM languages WHERE username = '${user.username}'`;
+  const getLocations = `SELECT * FROM locations WHERE username = '${user.username}'`;
+
+  db.task('get-everything', task => {
+    return task.batch([task.any(getGeneral), task.any(getEducations), task.any(getExperiences), task.any(getSkills), task.any(getLanguages), task.any(getLocations)]);
+  })
+    .then(data => {
+      res.render("pages/info", {
+        data,
+      });
+    })
+    .catch(err => {
+      res.render("pages/info", {
+        data: [],
+        error: true,
+        message: err.message,
+      });
+  });
 });
 
 app.post('/info/addGeneral', (req, res) => {
@@ -157,7 +178,7 @@ app.post('/info/addGeneral', (req, res) => {
 });
 
 app.post('/info/addEducation', (req, res) => {
-  const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, username) VALUES ('${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}','${user.username}')`;
+  const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, description, username) VALUES ('${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}', '${user.username}')`;
 
   db.task('get-everything', task => {
     return task.any(add);
@@ -178,16 +199,8 @@ app.delete('/info/rmEducation', (req, res) => {
   
 });
 
-app.post('/info/addEducationDescription', (req, res) => {
-  
-});
-
-app.delete('/info/rmEducationDescription', (req, res) => {
-  
-});
-
 app.post('/info/addExperience', (req, res) => {
-  const add = `INSERT INTO experiences (organization, title, startdate, endDate, username) VALUES ('${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.endDate}','${user.username}')`;
+  const add = `INSERT INTO experiences (organization, title, startdate, endDate, description, username) VALUES ('${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}','${user.username}')`;
 
   db.task('get-everything', task => {
     return task.any(add);
@@ -209,16 +222,8 @@ app.delete('/info/rmExperience', (req, res) => {
   
 });
 
-app.post('/info/addExperienceDescription', (req, res) => {
-  
-});
-
-app.delete('/info/rmExperienceDescription', (req, res) => {
-  
-});
-
 app.post('/info/addSkill', (req, res) => {
-  const add = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${req.body.username}')`;
+  const add = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${user.username}')`;
 
   db.task('get-everything', task => {
     return task.any(add);
