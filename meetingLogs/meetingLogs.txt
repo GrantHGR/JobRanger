@@ -1,0 +1,19 @@
+04/10/23
+    TASKS:
+        Max: Input info
+        Sam: Login/ Register
+        Sang: Formatting and saving pdfs
+        Prajwal & Grant: Job API 
+        Gerardo: database structure diagram.
+    GENERAL TODO:
+        tasks for week, icebox ideas, database schema
+
+04/17/23
+    TASKS:
+        Max: made database; will add APIs.
+        Sam: made forms; will add APIs and UATs.
+        Prajwal/Grant: finding job APIs; will make jobs page from pulled data.
+        Gerardo: made structure diagram; will make UI nice 
+        Sang: made a template for pdfs; will make a print functionality.
+    TODO:
+        add bookmarks page (icebox idea)
