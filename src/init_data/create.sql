@@ -6,6 +6,7 @@ CREATE TABLE users(
 
 DROP TABLE IF EXISTS general CASCADE;
 CREATE TABLE general(
+    id SERIAL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
     dob DATE NOT NULL,
