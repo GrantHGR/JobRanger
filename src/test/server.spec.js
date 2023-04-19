@@ -15,7 +15,6 @@ describe('Register!', () => {
         .send({username: 'test123', password: 'test234'})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          // expect(res.body.message).to.equals('Success');
           done();
         });
     })
@@ -26,7 +25,6 @@ describe('Register!', () => {
       .send({username: '', password: ''})
       .end((err, res) => {
         expect(res).to.have.status(200);
-        // expect(res.body.message).to.equals('Invalid input');
         done();
       });
   });

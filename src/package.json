@@ -23,7 +23,7 @@
     "start": "node index.js",
     "dev": "nodemon server.js",
     "test": "mocha",
-    "testandrun": "npm run prestart && npm run test"
+    "testandrun": "npm run prestart && npm run test && npm run start"
   },
   "description": "A3Resume Team Members: Grant Hagrave || Prajwal Nepal || Sang Shim || Sam Adams || Max Eaton || Gerardo Ferrigno https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1o87lKbTGIv3FhIvg7vtvL0VpAQS58BPy48TdrFrEEsibVmL0AIXITYqcUG3RHL7Nd4P6YPrIv",
   "version": "1.0.0",
