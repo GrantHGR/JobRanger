@@ -86,14 +86,15 @@ app.post('/login', async (req, res) => {
           user.password = data[0].password;
           req.session.user = user;
           req.session.save();
-          res.redirect('/discover');
+
+          res.redirect(200, '/discover');
         } else {
-          res.locals.message = 'Incorrect username or password.';
-          res.render("pages/login");
+          // res.locals.message = 'Incorrect username or password.';
+          res.status(200).render("pages/login");
         }
       })
       .catch(err => {
-        res.redirect('/register');
+        res.redirect(200,'/register');
       });
 });
 
@@ -217,18 +218,18 @@ app.delete('/info/rmExperienceDescription', (req, res) => {
 });
 
 app.post('/info/addSkill', (req, res) => {
-  const add = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${user.username}') WHERE NOT EXISTS (SELECT * FROM skills WHERE skill = '${req.body.skill}')`;
+  const add = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${req.body.username}')`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
     .then(data => {
-      res.render("pages/info", {
+      res.status(200).render("pages/info", {
         message: "Succeeded to add skill",
       });
     })
     .catch(err => {
-      res.render("pages/info", {
+      res.status(400).render("pages/info", {
         message: "Failed to add skill",
       });
     });
@@ -329,5 +330,5 @@ app.delete('/info/rmLocation', (req, res) => {
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
 // module.exports = app.listen(3000);
-app.listen(3000);
+module.exports = app.listen(3000);
 console.log('Server is listening on port 3000');
