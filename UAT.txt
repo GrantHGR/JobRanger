@@ -1,8 +1,0 @@
-Test 1 (register): 
-    Ensures that user inputs valid username and password to register.
-Test 2 (login): 
-    Ensures that user inputs valid username and password that matches username and password in database.
-Test 3 (addSkill):
-    Ensures that user inputs valid skill. 
-Test 4 (addLanguage): 
-    Ensures that user inputs valid language. 
