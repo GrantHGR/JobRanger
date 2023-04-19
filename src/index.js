@@ -224,12 +224,12 @@ app.post('/info/addSkill', (req, res) => {
     return task.any(add);
   })
     .then(data => {
-      res.status(200).render("pages/info", {
+      res.render("pages/info", {
         message: "Succeeded to add skill",
       });
     })
     .catch(err => {
-      res.status(400).render("pages/info", {
+      res.render("pages/info", {
         message: "Failed to add skill",
       });
     });

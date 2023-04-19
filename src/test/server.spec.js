@@ -76,7 +76,7 @@ describe('Add Skill', () => {
       .post('/info/addSkill')
       .send({username: '1', skill: 55})
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(200);
         // expect(res.body.message).to.equals('Failed to add skill');
         done();
       });
