@@ -39,9 +39,7 @@ describe('login!', () => {
         .post('/login')
         .send({username: 'test123', password: 'test234'})
         .end((err, res) => {
-          // console.log(res)
           expect(res).to.have.status(200);
-          // expect(res.body.message).to.equals('Success');
           done();
         });
     })
@@ -52,7 +50,6 @@ describe('login!', () => {
       .send({id: '5', username: '', password: ''})
       .end((err, res) => {
         expect(res).to.have.status(200);
-        // expect(res.body.message).to.equals('Invalid input');
         done();
       });
   });
@@ -66,7 +63,6 @@ describe('Add Skill', () => {
       .send({username: 'test123', skill: 'Hustle Pool'})
       .end((err, res) => {
         expect(res).to.have.status(200);
-        // expect(res.body.message).to.equals('Succeeded to add skill');
         done();
       });
   })
@@ -77,7 +73,6 @@ describe('Add Skill', () => {
       .send({username: '1', skill: 55})
       .end((err, res) => {
         expect(res).to.have.status(200);
-        // expect(res.body.message).to.equals('Failed to add skill');
         done();
       });
   });
