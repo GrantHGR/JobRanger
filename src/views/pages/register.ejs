@@ -1,24 +1,24 @@
 <%- include ('../partials/header') %>
-  <%- include ('../partials/menu') %>
+<%- include ('../partials/menu') %>
 
-    <main>
-      <div class="container">
-        <h1>Register</h1>
-        <form action="/register" method="POST">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" />
+<main>
+  <div class="container">
+    <h1>Register</h1>
+    <form action="/register" method="POST">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" class="form-control" />
 
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" class="form-control" />
 
-          <hr>
-          <p>
-            Already have an account?
-            <a href="\login">Login</a>
-            <input type="submit" value="Register" class="btn btn-primary" style="float:right;" />
-          </p>
-        </form>
-      </div>
-    </main>
+      <hr>
+      <p>
+        Already have an account?
+        <a href="\login">Login</a>
+        <input type="submit" value="Register" class="btn btn-primary" style="float:right;" />
+      </p>
+    </form>
+  </div>
+</main>
 
-    <%- include ('../partials/footer') %>
+<%- include ('../partials/footer') %>

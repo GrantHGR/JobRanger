@@ -106,7 +106,8 @@ app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = await bcrypt.hash(req.body.password, 10);
     const insert = `INSERT INTO users (username, password) VALUES ('${username}', '${password}');`;
-
+console.log("paosdp");
+    console.log(password);
     db.task('get-everything', task => {
         return task.any(insert);
     })
@@ -201,7 +202,7 @@ app.post('/info/editGeneral', async (req, res) => {
 app.post('/info/updateGeneral', async (req, res) => {
   const update = `UPDATE general SET firstname='${req.body.firstname}', lastname='${req.body.lastname}', dob='${req.body.dob}', email='${req.body.email}', linkedin='${req.body.linkedin}', github='${req.body.github}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
-    return task.one(update);
+    return task.any(update);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -257,7 +258,7 @@ app.post('/info/editEducation', async (req, res) => {
 app.post('/info/updateEducation', async (req, res) => {
   const update = `UPDATE educations SET school='${req.body.school}', degree='${req.body.degree}', focus='${req.body.focus}', startDate='${req.body.startDate}', endDate='${req.body.endDate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
-    return task.one(update);
+    return task.any(update);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -334,7 +335,7 @@ app.post('/info/editExperience', async (req, res) => {
 app.post('/info/updateExperience', async (req, res) => {
   const update = `UPDATE experiences SET organization='${req.body.organization}', title='${req.body.title}', startDate='${req.body.startDate}', endDate='${req.body.endDate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
-    return task.one(update);
+    return task.any(update);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -411,7 +412,7 @@ app.post('/info/editSkill', async (req, res) => {
 app.post('/info/updateSkill', async (req, res) => {
   const update = `UPDATE skills SET skill='${req.body.skill}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
-    return task.one(update);
+    return task.any(update);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -488,7 +489,7 @@ app.post('/info/editLanguage', async (req, res) => {
 app.post('/info/updateLanguage', async (req, res) => {
   const update = `UPDATE languages SET language='${req.body.language}', proficiency='${req.body.proficiency}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
-    return task.one(update);
+    return task.any(update);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -565,7 +566,7 @@ app.post('/info/editLocation', async (req, res) => {
 app.post('/info/updateLocation', async (req, res) => {
   const update = `UPDATE locations SET country='${req.body.country}', city='${req.body.city}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
-    return task.one(update);
+    return task.any(update);
   })
     .then(async data => {
       res.render("pages/info", {
