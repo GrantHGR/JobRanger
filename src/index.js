@@ -180,14 +180,49 @@ app.post('/info/addGeneral', async (req, res) => {
     });
 });
 
+app.post('/info/editGeneral', async (req, res) => {
+  const edit = `SELECT * FROM general WHERE id = '${req.body.id}';`;
+  db.task('get-everything', task => {
+    return task.one(edit);
+  })
+    .then(async data => {
+      res.render("pages/edit", {
+        data: [[data], null, null, null, null, null],
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to edit general information",
+      });
+    });
+});
+
+app.post('/info/updateGeneral', async (req, res) => {
+  const update = `UPDATE general SET firstname='${req.body.firstname}', lastname='${req.body.lastname}', dob='${req.body.dob}', email='${req.body.email}', linkedin='${req.body.linkedin}', github='${req.body.github}' WHERE id = ${req.body.id};`;
+  db.task('get-everything', task => {
+    return task.one(update);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to update general information",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to update general information",
+      });
+    });
+});
+
 app.post('/info/addEducation', async (req, res) => {
-  const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
-  console.log(req.body.endDate);
+  const add = `INSERT INTO educations (school, degree, focus, startDate, endDate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startDate}', '${req.body.endDate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
   db.task('get-everything', task => {
     return task.one(add);
   })
     .then(async data => {
-      console.log(req.body.endDate);
       res.render("pages/info", {
         data: await getData(),
         message: "Succeeded to add education",
@@ -197,6 +232,43 @@ app.post('/info/addEducation', async (req, res) => {
       res.render("pages/info", {
         data: await getData(),
         message: "Failed to add education",
+      });
+    });
+});
+
+app.post('/info/editEducation', async (req, res) => {
+  const edit = `SELECT * FROM educations WHERE id = '${req.body.id}';`;
+  db.task('get-everything', task => {
+    return task.one(edit);
+  })
+    .then(async data => {
+      res.render("pages/edit", {
+        data: [null, [data], null, null, null, null],
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to edit education information",
+      });
+    });
+});
+
+app.post('/info/updateEducation', async (req, res) => {
+  const update = `UPDATE educations SET school='${req.body.school}', degree='${req.body.degree}', focus='${req.body.focus}', startDate='${req.body.startDate}', endDate='${req.body.endDate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
+  db.task('get-everything', task => {
+    return task.one(update);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to update education information",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to update education information",
       });
     });
 });
@@ -222,7 +294,7 @@ app.post('/info/rmEducation', (req, res) => {
 });
 
 app.post('/info/addExperience', async (req, res) => {
-  const add = `INSERT INTO experiences (organization, title, startdate, endDate, description, username) SELECT '${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}','${user.username}' WHERE NOT EXISTS (SELECT * FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}');`;
+  const add = `INSERT INTO experiences (organization, title, startDate, endDate, description, username) SELECT '${req.body.organization}', '${req.body.title}', '${req.body.startDate}', '${req.body.endDate}', '${req.body.description}','${user.username}' WHERE NOT EXISTS (SELECT * FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}');`;
 
   db.task('get-everything', task => {
     return task.one(add);
@@ -239,7 +311,43 @@ app.post('/info/addExperience', async (req, res) => {
         message: "Failed to add experience",
       });
     });
-  
+});
+
+app.post('/info/editExperience', async (req, res) => {
+  const edit = `SELECT * FROM experiences WHERE id = '${req.body.id}';`;
+  db.task('get-everything', task => {
+    return task.one(edit);
+  })
+    .then(async data => {
+      res.render("pages/edit", {
+        data: [null, null, [data], null, null, null],
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to edit experience information",
+      });
+    });
+});
+
+app.post('/info/updateExperience', async (req, res) => {
+  const update = `UPDATE experiences SET organization='${req.body.organization}', title='${req.body.title}', startDate='${req.body.startDate}', endDate='${req.body.endDate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
+  db.task('get-everything', task => {
+    return task.one(update);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to update experience information",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to update experience information",
+      });
+    });
 });
 
 app.post('/info/rmExperience', (req, res) => {
@@ -278,6 +386,43 @@ app.post('/info/addSkill', async (req, res) => {
       res.render("pages/info", {
         data: await getData(),
         message: "Failed to add skill",
+      });
+    });
+});
+
+app.post('/info/editSkill', async (req, res) => {
+  const edit = `SELECT * FROM skills WHERE id = '${req.body.id}';`;
+  db.task('get-everything', task => {
+    return task.one(edit);
+  })
+    .then(async data => {
+      res.render("pages/edit", {
+        data: [null, null, null, [data], null, null],
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to edit skill information",
+      });
+    });
+});
+
+app.post('/info/updateSkill', async (req, res) => {
+  const update = `UPDATE skills SET skill='${req.body.skill}' WHERE id = ${req.body.id};`;
+  db.task('get-everything', task => {
+    return task.one(update);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to update skill information",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to update skill information",
       });
     });
 });
@@ -322,6 +467,43 @@ app.post('/info/addLanguage', async (req, res) => {
     });
 });
 
+app.post('/info/editLanguage', async (req, res) => {
+  const edit = `SELECT * FROM languages WHERE id = '${req.body.id}';`;
+  db.task('get-everything', task => {
+    return task.one(edit);
+  })
+    .then(async data => {
+      res.render("pages/edit", {
+        data: [null, null, null, null, [data], null],
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to edit language information",
+      });
+    });
+});
+
+app.post('/info/updateLanguage', async (req, res) => {
+  const update = `UPDATE languages SET language='${req.body.language}', proficiency='${req.body.proficiency}' WHERE id = ${req.body.id};`;
+  db.task('get-everything', task => {
+    return task.one(update);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to update language information",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to update language information",
+      });
+    });
+});
+
 app.post('/info/rmLanguage', async (req, res) => {
   const rm = `DELETE FROM languages WHERE id = '${req.body.id}';`;
 
@@ -358,6 +540,43 @@ app.post('/info/addLocation', async (req, res) => {
       res.render("pages/info", {
         data: await getData(),
         message: "Failed to add location",
+      });
+    });
+});
+
+app.post('/info/editLocation', async (req, res) => {
+  const edit = `SELECT * FROM locations WHERE id = '${req.body.id}';`;
+  db.task('get-everything', task => {
+    return task.one(edit);
+  })
+    .then(async data => {
+      res.render("pages/edit", {
+        data: [null, null, null, null, null, [data]],
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to edit location information",
+      });
+    });
+});
+
+app.post('/info/updateLocation', async (req, res) => {
+  const update = `UPDATE locations SET country='${req.body.country}', city='${req.body.city}' WHERE id = ${req.body.id};`;
+  db.task('get-everything', task => {
+    return task.one(update);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to update location information",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to update location information",
       });
     });
 });
