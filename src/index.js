@@ -162,21 +162,18 @@ app.get('/info', async (req, res) => {
 });
 
 app.post('/info/addGeneral', async (req, res) => {
-  // add where not exist subquery
-  const add = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) VALUES ('${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}' ,'${user.username}');`;
+  const add = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) SELECT '${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM general WHERE username = '${user.username}');`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.one(add);
   })
     .then(async data => {
-      console.log("success");
       res.render("pages/info", {
         data: await getData(),
         message: "Succeeded to add general information",
       });
     })
     .catch(async err => {
-      console.log(err);
       res.render("pages/info", {
         data: await getData(),
         message: "Failed to add general information",
@@ -184,41 +181,61 @@ app.post('/info/addGeneral', async (req, res) => {
     });
 });
 
-app.post('/info/addEducation', (req, res) => {
-  const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, description, username) VALUES ('${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}', '${user.username}');`;
+app.post('/info/addEducation', async (req, res) => {
+  const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.one(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to add education",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to add education",
       });
     });
 });
 
 app.delete('/info/rmEducation', (req, res) => {
-  
-});
-
-app.post('/info/addExperience', (req, res) => {
-  const add = `INSERT INTO experiences (organization, title, startdate, endDate, description, username) VALUES ('${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}','${user.username}');`;
+  const rm = `DELETE FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree} AND focus = '${req.body.focus}' AND username = '${user.username}';`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to delete education",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to delete education",
+      });
+    });
+});
+
+app.post('/info/addExperience', async (req, res) => {
+  const add = `INSERT INTO experiences (organization, title, startdate, endDate, description, username) SELECT '${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}','${user.username}' WHERE NOT EXISTS (SELECT * FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}');`;
+
+  db.task('get-everything', task => {
+    return task.one(add);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to add experience",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to add experience",
       });
     });
@@ -226,112 +243,140 @@ app.post('/info/addExperience', (req, res) => {
 });
 
 app.delete('/info/rmExperience', (req, res) => {
-  
-});
-
-app.post('/info/addSkill', (req, res) => {
-  const add = `INSERT INTO skills (skill, username) VALUES ('${req.body.skill}', '${user.username}');`;
+  const rm = `DELETE FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}';`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
+        message: "Succeeded to delete experience",
+      });
+    })
+    .catch(async err => {
+      res.render("pages/info", {
+        data: await getData(),
+        message: "Failed to delete experience",
+      });
+    });
+});
+
+app.post('/info/addSkill', async (req, res) => {
+  const add = `INSERT INTO skills (skill, username) SELECT '${req.body.skill}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM skills WHERE skill = '${req.body.skill}' AND username = '${user.username}');`;
+
+  db.task('get-everything', task => {
+    return task.any(add);
+  })
+    .then(async data => {
+      res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to add skill",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to add skill",
       });
     });
 });
 
-app.delete('/info/rmSkill', (req, res) => {
+app.delete('/info/rmSkill', async (req, res) => {
   const rm = `DELETE FROM skills WHERE skill = '${req.body.skill}' AND username = '${user.username}';`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to delete skill",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to delete skill",
       });
     });
 });
 
-app.post('/info/addLanguage', (req, res) => {
-  const add = `INSERT INTO languages (language, proficiency, username) VALUES ('${req.body.language}', '${req.body.proficiency}', '${user.username}') WHERE NOT EXISTS (SELECT * FROM languages WHERE language = '${req.body.language}');`;
+app.post('/info/addLanguage', async (req, res) => {
+  const add = `INSERT INTO languages (language, proficiency, username) SELECT '${req.body.language}', '${req.body.proficiency}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM languages WHERE language = '${req.body.language}' AND username = '${user.username}');`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to add language",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to add language",
       });
     });
 });
 
-app.delete('/info/rmLanguage', (req, res) => {
+app.delete('/info/rmLanguage', async (req, res) => {
   const rm = `DELETE FROM languages WHERE language = '${req.body.language}' AND username = '${user.username}';`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to delete language",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to delete language",
       });
     });  
 });
 
-app.post('/info/addLocation', (req, res) => {
-  const add = `INSERT INTO locations (country, city, username) VALUES ('${req.body.country}', '${req.body.city}', '${user.username}') WHERE NOT EXISTS (SELECT * FROM locations WHERE country = '${req.body.country}' AND '${req.body.city}');`;
+app.post('/info/addLocation', async (req, res) => {
+  const add = `INSERT INTO locations (country, city, username) SELECT '${req.body.country}', '${req.body.city}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM locations WHERE country = '${req.body.country}' AND city = '${req.body.city}' AND username = '${user.username}');`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to add location",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to add location",
       });
     });
 });
 
-app.delete('/info/rmLocation', (req, res) => {
+app.delete('/info/rmLocation', async (req, res) => {
   const rm = `DELETE FROM locations WHERE country = '${req.body.country}' AND city = '${req.body.city}' AND username = '${user.username}';`;
 
   db.task('get-everything', task => {
     return task.any(add);
   })
-    .then(data => {
+    .then(async data => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Succeeded to delete location",
       });
     })
-    .catch(err => {
+    .catch(async err => {
       res.render("pages/info", {
+        data: await getData(),
         message: "Failed to delete location",
       });
     });
