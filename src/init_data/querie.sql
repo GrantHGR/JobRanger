@@ -1,0 +1,1 @@
+SELECT * FROM educations WHERE username = '${req.body.username}';

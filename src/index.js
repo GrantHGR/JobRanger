@@ -163,7 +163,6 @@ app.get('/info', async (req, res) => {
 
 app.post('/info/addGeneral', async (req, res) => {
   const add = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) SELECT '${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM general WHERE username = '${user.username}');`;
-
   db.task('get-everything', task => {
     return task.one(add);
   })
@@ -183,11 +182,12 @@ app.post('/info/addGeneral', async (req, res) => {
 
 app.post('/info/addEducation', async (req, res) => {
   const add = `INSERT INTO educations (school, degree, focus, startdate, endDate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.endDate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
-
+  console.log(req.body.endDate);
   db.task('get-everything', task => {
     return task.one(add);
   })
     .then(async data => {
+      console.log(req.body.endDate);
       res.render("pages/info", {
         data: await getData(),
         message: "Succeeded to add education",
@@ -201,11 +201,11 @@ app.post('/info/addEducation', async (req, res) => {
     });
 });
 
-app.delete('/info/rmEducation', (req, res) => {
-  const rm = `DELETE FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree} AND focus = '${req.body.focus}' AND username = '${user.username}';`;
+app.post('/info/rmEducation', (req, res) => {
+  const rm = `DELETE FROM educations WHERE id = '${req.body.id}';`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.any(rm);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -242,11 +242,11 @@ app.post('/info/addExperience', async (req, res) => {
   
 });
 
-app.delete('/info/rmExperience', (req, res) => {
-  const rm = `DELETE FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}';`;
+app.post('/info/rmExperience', (req, res) => {
+  const rm = `DELETE FROM experiences WHERE id = '${req.body.id}';`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.any(rm);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -282,11 +282,11 @@ app.post('/info/addSkill', async (req, res) => {
     });
 });
 
-app.delete('/info/rmSkill', async (req, res) => {
-  const rm = `DELETE FROM skills WHERE skill = '${req.body.skill}' AND username = '${user.username}';`;
+app.post('/info/rmSkill', async (req, res) => {
+  const rm = `DELETE FROM skills WHERE id = '${req.body.id}';`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.any(rm);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -322,11 +322,11 @@ app.post('/info/addLanguage', async (req, res) => {
     });
 });
 
-app.delete('/info/rmLanguage', async (req, res) => {
-  const rm = `DELETE FROM languages WHERE language = '${req.body.language}' AND username = '${user.username}';`;
+app.post('/info/rmLanguage', async (req, res) => {
+  const rm = `DELETE FROM languages WHERE id = '${req.body.id}';`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.any(rm);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -362,11 +362,11 @@ app.post('/info/addLocation', async (req, res) => {
     });
 });
 
-app.delete('/info/rmLocation', async (req, res) => {
-  const rm = `DELETE FROM locations WHERE country = '${req.body.country}' AND city = '${req.body.city}' AND username = '${user.username}';`;
+app.post('/info/rmLocation', async (req, res) => {
+  const rm = `DELETE FROM locations WHERE id = '${req.body.id}';`;
 
   db.task('get-everything', task => {
-    return task.any(add);
+    return task.any(rm);
   })
     .then(async data => {
       res.render("pages/info", {
