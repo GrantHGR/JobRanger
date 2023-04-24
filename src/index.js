@@ -101,6 +101,10 @@ app.get('/register', (req, res) => {
     res.render('pages/register');
 });
 
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+});
+
 app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = await bcrypt.hash(req.body.password, 10);
