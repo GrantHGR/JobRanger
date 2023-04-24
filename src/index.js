@@ -608,6 +608,42 @@ app.post('/Template', async (req,res) => {
   });
 });
 
+
+// const request = require('request');    
+            
+var host = 'data.usajobs.gov';  
+// var userAgent = 'grant.hargrav@gmail.com';  
+var userAgent = 'nepalprajwal122@gmail.com'; 
+// var authKey = 'QYaokDz2ueAHu3iPkUCh8Zn7wBR11Hl0l7ruwzfGJ8U='; 
+var authKey = 'eqZopqznQlnIvQF9cj3OgQNjqO9fY/n+0llgOg5SvPE='; 
+
+
+app.get('/discover' ,(req,res) =>{
+  axios({      
+      url: 'https://data.usajobs.gov/api/search?JobCategoryCode=2210&Keyword=Software Development&LocationName=Washington, DC',      
+      method: 'GET',      
+      headers: {          
+          "Host": host,          
+          "User-Agent": userAgent,          
+          "Authorization-Key": authKey      
+      }  
+  })
+  .then(results => {
+    console.log(results.data) 
+    var data = results.data; 
+    // var data = JSON.parse(results.data);  
+    //let events = results.data._embedded.events;
+    res.render('pages/discover',{data:data})
+  })
+  .catch(error => {
+    // Handle errors
+    console.log(error)
+    res.render('pages/home',{message:"Something went wrong"});
+  });
+  
+});
+
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************

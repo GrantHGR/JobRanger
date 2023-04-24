@@ -1,0 +1,26 @@
+<%- include ('../partials/header') %>
+    <%- include ('../partials/menu') %>
+        <%- include ('../partials/message') %>
+
+    <main>
+      <div class="container">
+        <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+        <div class="row">
+          <% for(let i=0; i<events.length; i++){%>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <div class="card">
+                
+                  <h5 class="card-title"><%=data[i].name%></h5>
+                  <img class="card-img-top" src="<%= data[i].images[0].url%>" alt="https://daily.jstor.org/wp-content/uploads/2023/01/good_times_with_bad_music_1050x700.jpg">
+                  <h6 class="class-subtitle"><%=data[i].dates.start.localDate%></h6>
+                  <a href="<%= data[i].url%>" class="btn btn-primary">Book Now</a>
+                
+              </div>
+            </div>
+          <%}%>
+        </div>
+      </div>
+      </div>
+    </main>
+
+    <%- include ('../partials/footer') %>
