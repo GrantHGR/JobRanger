@@ -602,6 +602,12 @@ app.post('/info/rmLocation', async (req, res) => {
     });
 });
 
+app.post('/Template', async (req,res) => {
+  return res.render("pages/resume_1", {
+    result: await getData(),
+  });
+});
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************

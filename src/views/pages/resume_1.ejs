@@ -6,8 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
-    <h1><center><%= result.name %></center></h1>
-    <p style= "font-size:30px;"> <%= result.description %> </p1>
+    <h1><center><%= result[0].firstname, result[0].lastname %></center></h1>
+    <p style= "font-size:30px;"> Github: <%= result[0].github %>, LinkedIn: <%= result[0].linkedin %> Email: <%= result[0].email %> </p1>
     <div class="divider"></div>
     
     <div id = "resume">
@@ -20,15 +20,22 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td><b><%= result.education1 %></b></td>
-            </tr>
-            <tr>
-              <td><b><%= result.education2 %></b></td>
-            </tr>
-            <tr>
-            <td><b><%= result.education3 %></b></td>
-            </tr>
+            <% result[1].forEach(educations =>{ %>
+              <tr>
+                <td>
+                  Institution: <%= educations.school %>
+                </td>
+                <td>
+                  Duration: <%= educations.startDate %> ~ <%= educations.endDate %>
+                </td>
+                <td>
+                  Field <%= educations.focus %>
+                </td>
+                <td>
+                  Description: <%= educations.description %>
+                </td>
+              </tr>      
+            <%}) %> 
           </tbody>
         </table> 
 
@@ -37,33 +44,77 @@
         <table class="striped">
           <thead>
             <tr>
-                <th><p style= "font-size:20px;"> Achievements</p1></th>
+                <th><p style= "font-size:20px;"> Experiences</p1></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td><%= result.achievement1 %></td>
-            </tr>
-            <tr>
-                <td><%= result.achievement2 %></td>
-              </tr>
-            <tr>
-                <td><%= result.achievement3 %></td>
-            </tr>
-            <tr>
-                <td><%= result.achievement4 %></td>
-            </tr>
+            <% result[2].forEach(experiences =>{ %>
+              <tr>
+                <td>
+                  Organization: <%= experiences.organization %>
+                </td>
+                <td>
+                  Title: <%= experiences.title %>
+                </td>
+                <td>
+                  Duration: <%= experiences.startDate %> ~ <%= experiences.endDate %>
+                </td>
+                <td>
+                  Description: <%= experiences.description %>
+                </td>
+              </tr>      
+            <%}) %> 
           </tbody>
         </table>
   
         <div class="divider"></div>
 
-        <div id = "Finale">
-            <tr>
-                <td><%= result.Finale %></td>
-            </tr>     
+        <div id = "skills">
+          <table class="striped">
+            <thead>
+              <tr>
+                  <th><p style= "font-size:20px;"> Skills</p1></th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <% result[3].forEach(skills =>{ %>
+                <tr>
+                  <td>
+                    Skill: <%= skills.Skill %>
+                  </td>
+                </tr>      
+              <%}) %> 
+            </tbody>
+          </table>    
         </div> 
+
+        <div class="divider"></div>
+        
+        <div id = "languages">
+          <table class="striped">
+            <thead>
+              <tr>
+                  <th><p style= "font-size:20px;"> Languages</p1></th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <% result[4].forEach(languages =>{ %>
+                <tr>
+                  <td>
+                    Language: <%= languages.language %>
+                  </td>
+                  <td>
+                    Proficiency: <%= languages.proficiency %>
+                  </td>
+                </tr>      
+              <%}) %> 
+            </tbody>
+          </table>    
+        </div> 
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
