@@ -219,7 +219,7 @@ app.post('/info/updateGeneral', async (req, res) => {
 });
 
 app.post('/info/addEducation', async (req, res) => {
-  const add = `INSERT INTO educations (school, degree, focus, startDate, endDate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startDate}', '${req.body.endDate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
+  const add = `INSERT INTO educations (school, degree, focus, startdate, enddate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.enddate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
   db.task('get-everything', task => {
     return task.one(add);
   })
@@ -256,7 +256,7 @@ app.post('/info/editEducation', async (req, res) => {
 });
 
 app.post('/info/updateEducation', async (req, res) => {
-  const update = `UPDATE educations SET school='${req.body.school}', degree='${req.body.degree}', focus='${req.body.focus}', startDate='${req.body.startDate}', endDate='${req.body.endDate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
+  const update = `UPDATE educations SET school='${req.body.school}', degree='${req.body.degree}', focus='${req.body.focus}', startdate='${req.body.startdate}', enddate='${req.body.enddate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
     return task.any(update);
   })
@@ -295,7 +295,7 @@ app.post('/info/rmEducation', (req, res) => {
 });
 
 app.post('/info/addExperience', async (req, res) => {
-  const add = `INSERT INTO experiences (organization, title, startDate, endDate, description, username) SELECT '${req.body.organization}', '${req.body.title}', '${req.body.startDate}', '${req.body.endDate}', '${req.body.description}','${user.username}' WHERE NOT EXISTS (SELECT * FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}');`;
+  const add = `INSERT INTO experiences (organization, title, startdate, enddate, description, username) SELECT '${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.enddate}', '${req.body.description}','${user.username}' WHERE NOT EXISTS (SELECT * FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}');`;
 
   db.task('get-everything', task => {
     return task.one(add);
@@ -333,7 +333,7 @@ app.post('/info/editExperience', async (req, res) => {
 });
 
 app.post('/info/updateExperience', async (req, res) => {
-  const update = `UPDATE experiences SET organization='${req.body.organization}', title='${req.body.title}', startDate='${req.body.startDate}', endDate='${req.body.endDate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
+  const update = `UPDATE experiences SET organization='${req.body.organization}', title='${req.body.title}', startdate='${req.body.startdate}', enddate='${req.body.enddate}', description='${req.body.description}' WHERE id = ${req.body.id};`;
   db.task('get-everything', task => {
     return task.any(update);
   })
