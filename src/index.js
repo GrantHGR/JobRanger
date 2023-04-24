@@ -602,7 +602,7 @@ app.post('/info/rmLocation', async (req, res) => {
     });
 });
 
-app.post('/Template', async (req,res) => {
+app.get('/template', async (req,res) => {
   return res.render("pages/resume_1", {
     result: await getData(),
   });
