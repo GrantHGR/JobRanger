@@ -74,6 +74,7 @@ app.get('/login', (req, res) => {
     res.render("pages/login");
 });
 
+
 app.post('/login', async (req, res) => {
     const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
 
@@ -609,8 +610,8 @@ app.get('/template', async (req,res) => {
 });
 
 
-// const request = require('request');    
-            
+
+
 var host = 'data.usajobs.gov';  
 // var userAgent = 'grant.hargrav@gmail.com';  
 var userAgent = 'nepalprajwal122@gmail.com'; 
@@ -630,13 +631,10 @@ app.get('/discover' ,(req,res) =>{
   })
   .then(results => {
     console.log(results.data) 
-    var data = results.data; 
-    // var data = JSON.parse(results.data);  
-    //let events = results.data._embedded.events;
+    var data =  results.data.SearchResult.SearchResultItems; 
     res.render('pages/discover',{data:data})
   })
   .catch(error => {
-    // Handle errors
     console.log(error)
     res.render('pages/home',{message:"Something went wrong"});
   });
