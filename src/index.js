@@ -641,6 +641,7 @@ app.get('/discover' ,(req,res) =>{
   
 });
 
+app.use(express.static("public"));
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
