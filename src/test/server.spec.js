@@ -104,7 +104,7 @@ describe('Add Education', () => {
     chai
       .request(server)
       .post('/info/addEducation')
-      .send({username: 'test123', school: 'East High School', degree: 'GED', focus: 'Keepin it real', startDate: '2007-12-12', endDate: '2011-05-05', description: 'You know what it is'})
+      .send({username: 'test123', school: 'East High School', degree: 'GED', focus: 'Keepin it real', startdate: '2007-12-12', enddate: '2011-05-05', description: 'You know what it is'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -114,7 +114,7 @@ describe('Add Education', () => {
     chai
       .request(server)
       .post('/info/addEducation')
-      .send({username: 'test123', school: 'East High School', degree: 55, focus: 'Keepin it real', startDate: '2007-32-32', endDate: '2011-05-05', description: 'You know what it is'})
+      .send({username: 'test123', school: 'East High School', degree: 55, focus: 'Keepin it real', startdate: '2007-32-32', enddate: '2011-05-05', description: 'You know what it is'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -127,7 +127,7 @@ describe('Update Education', () => {
     chai
       .request(server)
       .post('/info/updateEducation')
-      .send({username: 'test123', school: 'West High School', degree: 'GED', focus: 'Keepin it real', startDate: '2007-12-12', endDate: '2011-05-05', description: 'You know what it is'})
+      .send({username: 'test123', school: 'West High School', degree: 'GED', focus: 'Keepin it real', startdate: '2007-12-12', enddate: '2011-05-05', description: 'You know what it is'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -137,7 +137,7 @@ describe('Update Education', () => {
     chai
       .request(server)
       .post('/info/updateEducation')
-      .send({username: 'test123', school: 'East High School', degree: 55, focus: 'Keepin it real', startDate: '2007-32-32', endDate: '2011-05-05', description: 'You know what it is'})
+      .send({username: 'test123', school: 'East High School', degree: 55, focus: 'Keepin it real', startdate: '2007-32-32', enddate: '2011-05-05', description: 'You know what it is'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -150,7 +150,7 @@ describe('Add Experience', () => {
     chai
       .request(server)
       .post('/info/addExperience')
-      .send({username: 'test123', organization: 'The Haus', title: 'Boss', startDate: '2011-11-11', endDate: '2014-11-11', description: 'Hahahahaha'})
+      .send({username: 'test123', organization: 'The Haus', title: 'Boss', startdate: '2011-11-11', enddate: '2014-11-11', description: 'Hahahahaha'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -160,7 +160,7 @@ describe('Add Experience', () => {
     chai
       .request(server)
       .post('/info/addExperience')
-      .send({username: 'test123', organization: 555, title: 'Boss', startDate: '2011-11-11', endDate: '2014-11-11', description: 'Hahahahaha'})
+      .send({username: 'test123', organization: 555, title: 'Boss', startdate: '2011-11-11', enddate: '2014-11-11', description: 'Hahahahaha'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -173,7 +173,7 @@ describe('Update Experience', () => {
     chai
       .request(server)
       .post('/info/updateExperience')
-      .send({username: 'test123', organization: 'The House', title: 'Peasant', startDate: '2011-11-11', endDate: '2014-11-11', description: 'Hahahahaha'})
+      .send({username: 'test123', organization: 'The House', title: 'Peasant', startdate: '2011-11-11', enddate: '2014-11-11', description: 'Hahahahaha'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -183,7 +183,7 @@ describe('Update Experience', () => {
     chai
       .request(server)
       .post('/info/updateExperience')
-      .send({username: 'test123', organization: 444, title: 'Boss', startDate: '2011-11-11', endDate: '2014-11-11', description: 'Hahahahaha'})
+      .send({username: 'test123', organization: 444, title: 'Boss', startdate: '2011-11-11', enddate: '2014-11-11', description: 'Hahahahaha'})
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
