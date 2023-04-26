@@ -74,14 +74,6 @@ app.get('/login', (req, res) => {
     res.render("pages/login");
 });
 
-app.get('/home', (req, res) => {
-  res.render("pages/home")
-})
-
-app.get('/discover', (req, res) => {
-  res.render("pages/discover")
-})
-
 app.post('/login', async (req, res) => {
     const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
 
@@ -97,12 +89,13 @@ app.post('/login', async (req, res) => {
 
           res.redirect(200, '/home');
         } else {
-          res.locals.message = 'Incorrect username or password.';
+          res.locals.message = 'Incorrect username or password';
           res.status(200).render("pages/login");
         }
       })
       .catch(err => {
-        res.redirect(200,'/register');
+        res.locals.message = 'Incorrect username or password';
+        res.status(200).render("pages/login");
       });
 });
 
@@ -120,10 +113,12 @@ console.log("paosdp");
         return task.any(insert);
     })
         .then(data => {
-          res.redirect('/login');
+          res.redirect(200, '/login');
         })
         .catch(err => {
-          res.redirect('/register');
+          console.log(err);
+          res.locals.message = 'Username already exists';
+          res.status(200).render("pages/register");
         });
 });
 
@@ -616,8 +611,9 @@ app.get('/template', async (req,res) => {
   });
 });
 
-
-
+app.get('/home', (req, res) => {
+  res.render("pages/home")
+});
 
 var host = 'data.usajobs.gov';  
 // var userAgent = 'grant.hargrav@gmail.com';  
@@ -638,12 +634,12 @@ app.get('/discover' ,(req,res) =>{
   })
   .then(results => {
     console.log(results.data) 
-    var data =  results.data.SearchResult.SearchResultItems; 
+    var data = results.data.SearchResult.SearchResultItems; 
     res.render('pages/discover',{data:data})
   })
   .catch(error => {
     console.log(error)
-    res.render('pages/home',{message:"Something went wrong"});
+    res.render('pages/home',{message:"Something went wrong", data:[]});
   });
   
 });
