@@ -79,7 +79,7 @@ app.get('/home', (req, res) => {
 })
 
 app.get('/discover', (req, res) => {
-  res.render("pages/discover")
+  res.render("pages/jobSearch")
 })
 
 app.post('/login', async (req, res) => {
