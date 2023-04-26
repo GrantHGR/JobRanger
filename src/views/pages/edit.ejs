@@ -15,7 +15,7 @@
         <h1>Edit Info</h1>
 
         <% if (data[0]) { %>
-            <form action="/info/updateGeneral" method="POST">
+            <form action="/info/updateGeneral" method="POST" id="general">
                 <h2>General</h2>
 
                 <label for="firstname">First Name</label>
@@ -40,10 +40,10 @@
 
                 <hr>
 
-                <!-- <form action="/info" method="GET" float="right">
-                    <button type="submit">Cancel</button>
-                </form> -->
-                <input type="submit" value="Update Info" class="btn btn-primary" style="float:right;" />
+                <input type="submit" value="Update" class="btn btn-primary" style="float:right;"/>
+            </form>
+            <form action="/info" method="GET" float="right">
+                <input type="submit" value="Cancel" class="btn btn-secondary" style="float:right;">
             </form>
         <% } %>
         
@@ -73,7 +73,10 @@
 
                 <hr>
 
-                <input type="submit" value="Update Info" class="btn btn-primary" style="float:right;" />
+                <input type="submit" value="Update" class="btn btn-primary" style="float:right;" />
+            </form>
+            <form action="/info" method="GET" float="right">
+                <input type="submit" value="Cancel" class="btn btn-secondary" style="float:right;">
             </form>
         <% } %>
 
@@ -100,7 +103,10 @@
 
                 <hr>
 
-                <input type="submit" value="Update Info" class="btn btn-primary" style="float:right;" />
+                <input type="submit" value="Update" class="btn btn-primary" style="float:right;" />
+            </form>
+            <form action="/info" method="GET" float="right">
+                <input type="submit" value="Cancel" class="btn btn-secondary" style="float:right;">
             </form>
         <% } %>
 
@@ -115,7 +121,10 @@
 
                 <hr>
 
-                <input type="submit" value="Update Info" class="btn btn-primary" style="float:right;" />
+                <input type="submit" value="Update " class="btn btn-primary" style="float:right;" />
+            </form>
+            <form action="/info" method="GET" float="right">
+                <input type="submit" value="Cancel" class="btn btn-secondary" style="float:right;">
             </form>
         <% } %>
 
@@ -133,7 +142,10 @@
 
                 <hr>
 
-                <input type="submit" value="Update Info" class="btn btn-primary" style="float:right;" />
+                <input type="submit" value="Update" class="btn btn-primary" style="float:right;" />
+            </form>
+            <form action="/info" method="GET" float="right">
+                <input type="submit" value="Cancel" class="btn btn-secondary" style="float:right;">
             </form>
         <% } %>
 
@@ -151,7 +163,10 @@
 
                 <hr>
 
-                <input type="submit" value="Update Info" class="btn btn-primary" style="float:right;" />
+                <input type="submit" value="Update" class="btn btn-primary" style="float:right;" />
+            </form>
+            <form action="/info" method="GET" float="right">
+                <input type="submit" value="Cancel" class="btn btn-secondary" style="float:right;">
             </form>
         <% } %>
     </div>
