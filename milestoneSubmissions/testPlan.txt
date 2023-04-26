@@ -1,0 +1,31 @@
+Login/register testing:
+
+A tester from our team or another team will run our program and attempt to create an account with a new username and password and then use it to sucessfully log in.
+They will also attemp to login with incoorect credentials to make sure access is denied and an apporoptiate message is displayed.
+
+Acceptance criteria:
+
+-Information entered in the register form will be stored in the users table
+-The above information can be used to login to their new account via the login page
+-Incorrect credentials, both username and/or password, will redirect the user back to the login page with an apporopriate message stating that their credentials were
+ invalid
+ 
+Resume generation testing:
+A tester from our team or another team will go to the info page and submit information into each existing form using relavant information. After submitting the 
+information they will then go to the resume page to verify that a resume with the correct information is generated in the format of their choosing.
+
+Acceptance criteria:
+-Each form posts to its relevant database table
+-After submiting information it is generated correctly on the resume page in the format of the user's choosing
+
+Job opportunities page testing:
+
+After entering information and creating a resume, a tester from our team or another team will go to the page that shows opportunities based on the the information they 
+have enterd. Opputunities pulled from public api's should be relavant to them, including the location they submitted for seeking opportunities. A link will be included 
+to allow the user to go the the webpage of the job listing.
+
+Acceptance criteria:
+
+- A number of job oppenings are generated on the page which are relevant to both the users skill, experience and education information, as well as the location they
+  have chose to search.
+- A link is porvided that sucessfully connects the user to the page to apply for the job they are interested in

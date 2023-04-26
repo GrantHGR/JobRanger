@@ -1,521 +1,389 @@
 <%- include ('../partials/header') %>
     <%- include ('../partials/menu') %>
-
-        <main>
-            <div class="container">
-                <h1>Add Info</h1>
-                <form action="/info/addGeneral" method="POST">
-                    <h2>General</h2>
-
-                    <label for="firstname">First Name</label>
-                    <input type="text" id="firstname" name="firstname" class="form-control" required />
-
-                    <label for="lastname">Last Name</label>
-                    <input type="text" id="lastname" name="lastname" class="form-control" required />
-
-                    <label for="dob">Birthday</label>
-                    <input type="date" id="dob" name="dob" class="form-control" />
-
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email" class="form-control" required />
-
-                    <label for="linkedin">LinkedIn</label>
-                    <input type="text" id="linkedin" name="linkedin" class="form-control" />
-
-                    <label for="github">GitHub</label>
-                    <input type="text" id="github" name="github" class="form-control" />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <br>
-
-                <form action="/info/addEducation" method="POST" id="education">
-                    <h2>Education</h2>
-
-                    <label for="school">School</label>
-                    <input type="text" id="school" name="school" class="form-control" required />
-
-                    <label for="degree">Degree</label>
-                    <input type="text" id="degree" name="degree" class="form-control" required />
-
-                    <label for="focus">Focus</label>
-                    <input type="text" id="focus" name="focus" class="form-control" />
-
-                    <label for="startdate">Start Date</label>
-                    <input type="date" id="startdate" name="startdate" class="form-control" required />
-
-                    <label for="endDate">End Date</label>
-                    <input type="date" id="endDate" name="endDate" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton">Add another form</button>
-
-                <script>
-                    const addButton = document.getElementById('addFormButton');
-                    addButton.addEventListener('click', () => {
-                        const form = document.createElement('form');
-                        form.action = "/info/addEducation"
-                        form.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const label2 = document.createElement('label');
-                        const input2 = document.createElement('input');
-                        const label3 = document.createElement('label');
-                        const input3 = document.createElement('input');
-                        const label4 = document.createElement('label');
-                        const input4 = document.createElement('input');
-                        const label5 = document.createElement('label');
-                        const input5 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `school`);
-                        label1.textContent = 'School';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `school`);
-                        input1.setAttribute('name', `school`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        label2.setAttribute('for', `degree`);
-                        label2.textContent = 'Degree';
-                        input2.setAttribute('type', 'text');
-                        input2.setAttribute('id', `degree`);
-                        input2.setAttribute('name', `degree`);
-                        input2.setAttribute('class', `form-control`);
-                        input2.setAttribute('required', "");
-
-                        label3.setAttribute('for', `focus`);
-                        label3.textContent = 'Focus';
-                        input3.setAttribute('type', 'text');
-                        input3.setAttribute('id', `focus`);
-                        input3.setAttribute('name', `focus`);
-                        input3.setAttribute('class', `form-control`);
-
-                        label4.setAttribute('for', `startdate`);
-                        label4.textContent = 'Start Date';
-                        input4.setAttribute('type', 'date');
-                        input4.setAttribute('id', `startdate`);
-                        input4.setAttribute('name', `startdate`);
-                        input4.setAttribute('class', `form-control`);
-                        input4.setAttribute('required', "");
-
-                        label5.setAttribute('for', `endDate`);
-                        label5.textContent = 'End Date';
-                        input5.setAttribute('type', 'date');
-                        input5.setAttribute('id', `endDate`);
-                        input5.setAttribute('name', `endDate`);
-                        input5.setAttribute('class', `form-control`);
-                        input5.setAttribute('required', "");
-
-                        form.appendChild(document.createElement("br"));
-                        form.appendChild(label1);
-                        form.appendChild(input1);
-                        form.appendChild(label2);
-                        form.appendChild(input2);
-                        form.appendChild(label3);
-                        form.appendChild(input3);
-                        form.appendChild(label4);
-                        form.appendChild(input4);
-                        form.appendChild(label5);
-                        form.appendChild(input5);
-                        form.appendChild(document.createElement('br'));
-                        form.appendChild(submitButton);
-
-                        const targetElement = document.getElementById('education');
-                        targetElement.append(form);
-                    });
-                </script>
-
-                <br>
-
-                <form action="/info/addEducationDescription" method="POST" id="educationDescription">
-                    <h2>Education Description</h2>
-
-                    <label for="description"></label>
-                    <input type="text" id="description" name="description" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton2">Add another form</button>
-
-                <script>
-                    const addButton2 = document.getElementById('addFormButton2');
-                    addButton2.addEventListener('click', () => {
-                        const form2 = document.createElement('form');
-                        form2.action = "/info/addEducationDescription"
-                        form2.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `description`);
-                        // label1.textContent = 'School';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `description`);
-                        input1.setAttribute('name', `dsecription`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        form2.appendChild(document.createElement("br"));
-                        form2.appendChild(label1);
-                        form2.appendChild(input1);
-                        form2.appendChild(document.createElement('br'));
-                        form2.appendChild(submitButton);
-
-                        const targetElement = document.getElementById('educationDescription');
-                        targetElement.append(form2);
-                    });
-                </script>
-
-                <br>
-
-                <form action="/info/addExperience" method="POST" id = "experience">
-                    <h2>Experiences</h2>
-
-                    <label for="organization">Organization</label>
-                    <input type="text" id="organization" name="organization" class="form-control" required />
-
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" required />
-
-                    <label for="startdate">Start Date</label>
-                    <input type="date" id="startdate" name="startdate" class="form-control" required />
-
-                    <label for="endDate">End Date</label>
-                    <input type="date" id="endDate" name="endDate" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton3">Add another form</button>
-
-                <script>
-                    const addButton3 = document.getElementById('addFormButton3');
-                    addButton3.addEventListener('click', () => {
-                        const form3 = document.createElement('form');
-                        form3.action = "/info/addExperience"
-                        form3.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const label2 = document.createElement('label');
-                        const input2 = document.createElement('input');
-                        const label3 = document.createElement('label');
-                        const input3 = document.createElement('input');
-                        const label4 = document.createElement('label');
-                        const input4 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `organization`);
-                        label1.textContent = 'Organization';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `organization`);
-                        input1.setAttribute('name', `organization`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        label2.setAttribute('for', `title`);
-                        label2.textContent = 'Title';
-                        input2.setAttribute('type', 'text');
-                        input2.setAttribute('id', `title`);
-                        input2.setAttribute('name', `title`);
-                        input2.setAttribute('class', `form-control`);
-                        input2.setAttribute('required', "");
-
-                        label3.setAttribute('for', `startdate`);
-                        label3.textContent = 'Start Date';
-                        input3.setAttribute('type', 'date');
-                        input3.setAttribute('id', `startdate`);
-                        input3.setAttribute('name', `startdate`);
-                        input3.setAttribute('class', `form-control`);
-                        input3.setAttribute('required', "");
-
-                        label4.setAttribute('for', `endDate`);
-                        label4.textContent = 'End Date';
-                        input4.setAttribute('type', 'date');
-                        input4.setAttribute('id', `endDate`);
-                        input4.setAttribute('name', `endDate`);
-                        input4.setAttribute('class', `form-control`);
-                        input4.setAttribute('required', "");
-
-                        form3.appendChild(document.createElement("br"));
-                        form3.appendChild(label1);
-                        form3.appendChild(input1);
-                        form3.appendChild(label2);
-                        form3.appendChild(input2);
-                        form3.appendChild(label3);
-                        form3.appendChild(input3);
-                        form3.appendChild(label4);
-                        form3.appendChild(input4);
-                        form3.appendChild(document.createElement('br'));
-                        form3.appendChild(submitButton);
-
-
-                        const targetElement = document.getElementById('experience');
-                        targetElement.append(form3);
-                    });
-                </script>
-
-                <br>
-
-                <form action="/info/addExperienceDescription" method="POST" id="experienceDescription">
-                    <h2>Experience Description</h2>
-
-                    <label for="description"></label>
-                    <input type="text" id="description" name="description" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton4">Add another form</button>
-
-                <script>
-                    const addButton4 = document.getElementById('addFormButton4');
-                    addButton4.addEventListener('click', () => {
-                        const form4 = document.createElement('form');
-                        form4.action = "/info/addExperienceDescription"
-                        form4.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `description`);
-                        // label1.textContent = 'School';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `description`);
-                        input1.setAttribute('name', `dsecription`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        form4.appendChild(document.createElement("br"));
-                        form4.appendChild(label1);
-                        form4.appendChild(input1);
-                        form4.appendChild(document.createElement('br'));
-                        form4.appendChild(submitButton);
-
-                        const targetElement = document.getElementById('experienceDescription');
-                        targetElement.append(form4);
-                    });
-                </script>
-
-
-                <br>
-
-                <form action="/info/addSkill" method="POST" id="skills">
-                    <h2>Skills</h2>
-
-                    <label for="skill">Skill</label>
-                    <input type="text" id="skill" name="skill" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton5">Add another form</button>
-
-                <script>
-                    const addButton5 = document.getElementById('addFormButton5');
-                    addButton5.addEventListener('click', () => {
-                        const form5 = document.createElement('form');
-                        form5.action = "/info/addSkill"
-                        form5.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `skill`);
-                        label1.textContent = 'Skill';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `skill`);
-                        input1.setAttribute('name', `skill`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        form5.appendChild(document.createElement("br"));
-                        form5.appendChild(label1);
-                        form5.appendChild(input1);
-                        form5.appendChild(document.createElement('br'));
-                        form5.appendChild(submitButton);
-
-                        const targetElement = document.getElementById('skills');
-                        targetElement.append(form5);
-                    });
-                </script>
-
-                <br>
-
-                <form action="/info/addLanguage" method="POST" id="languages">
-                    <h2>Languages</h2>
-
-                    <label for="language">Language</label>
-                    <input type="text" id="language" name="language" class="form-control" required />
-
-                    <label for="proficiency">Proficiency</label>
-                    <input type="text" id="proficiency" name="proficiency" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton6">Add another form</button>
-
-                <script>
-                    const addButton6 = document.getElementById('addFormButton6');
-                    addButton6.addEventListener('click', () => {
-                        const form6 = document.createElement('form');
-                        form6.action = "/info/addLanguage"
-                        form6.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const label2 = document.createElement('label');
-                        const input2 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `language`);
-                        label1.textContent = 'Language';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `language`);
-                        input1.setAttribute('name', `language`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        label2.setAttribute('for', `proficiency`);
-                        label2.textContent = 'Proficiency';
-                        input2.setAttribute('type', 'text');
-                        input2.setAttribute('id', `proficiency`);
-                        input2.setAttribute('name', `proficiency`);
-                        input2.setAttribute('class', `form-control`);
-                        input2.setAttribute('required', "");
-
-                        form6.appendChild(document.createElement("br"));
-                        form6.appendChild(label1);
-                        form6.appendChild(input1);
-                        form6.appendChild(label2);
-                        form6.appendChild(input2);
-                        form6.appendChild(document.createElement("br"));
-                        form6.appendChild(submitButton);
-
-                        const targetElement = document.getElementById('languages');
-                        targetElement.append(form6);
-                    });
-                </script>
-
-                <br>
-
-                <form action="/info/addLocation" method="POST" id="locations">
-                    <h2>Location</h2>
-
-                    <label for="country">Country</label>
-                    <input type="text" id="country" name="country" class="form-control" required />
-
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" class="form-control" required />
-
-                    <hr>
-
-                    <p>
-                        <input type="submit" value="Add Info" class="btn btn-primary" style="float:right;" />
-                    </p>
-                </form>
-
-                <button id="addFormButton7">Add another form</button>
-
-                <script>
-                    const addButton7 = document.getElementById('addFormButton7');
-                    addButton7.addEventListener('click', () => {
-                        const form7 = document.createElement('form');
-                        form7.action = "/info/addLocation"
-                        form7.method = "POST"
-                        const label1 = document.createElement('label');
-                        const input1 = document.createElement('input');
-                        const label2 = document.createElement('label');
-                        const input2 = document.createElement('input');
-                        const submitButton = document.createElement("button");
-                        submitButton.type = "submit";
-                        submitButton.innerText = "Add Info";
-                        submitButton.className = "btn btn-primary";
-                        submitButton.style = "float:right;";
-
-                        label1.setAttribute('for', `country`);
-                        label1.textContent = 'Country';
-                        input1.setAttribute('type', 'text');
-                        input1.setAttribute('id', `country`);
-                        input1.setAttribute('name', `language`);
-                        input1.setAttribute('class', `form-control`);
-                        input1.setAttribute('required', "");
-
-                        label2.setAttribute('for', `city`);
-                        label2.textContent = 'City';
-                        input2.setAttribute('type', 'text');
-                        input2.setAttribute('id', `city`);
-                        input2.setAttribute('name', `city`);
-                        input2.setAttribute('class', `form-control`);
-                        input2.setAttribute('required', "");
-
-                        form7.appendChild(document.createElement("br"));
-                        form7.appendChild(label1);
-                        form7.appendChild(input1);
-                        form7.appendChild(label2);
-                        form7.appendChild(input2);
-                        form7.appendChild(document.createElement("br"));
-                        form7.appendChild(submitButton);
-
-                        const targetElement = document.getElementById('locations');
-                        targetElement.append(form7);
-                    });
-                </script>
-            </div>
-        </main>
+        <%- include ('../partials/message') %>
+
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Bootstrap demo</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+                    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+                    crossorigin="anonymous">
+            </head>
+
+            <main>
+                <div class="container" style="padding-top: 25px">
+                    <h1>Add Info</h1>
+
+                    <div class="container" style="padding-top: 25px"></div>
+                    <div class="card" style="width: 100%; background-color: #808080;">
+                        <div class="card-body">
+                            <table>
+                                <tbody>
+                                    <h2>General</h2>
+                                    <% if (data[0][0]) { %>
+                                        <tr>Name:</tr>
+                                        <br>
+                                        <tr><%- data[0][0].firstname %></tr>&nbsp;
+                                        <tr><%- data[0][0].lastname %></tr>
+                                        <br>
+                                        <br>
+                                        <tr>Date of Birth:</tr>
+                                        <br>
+                                        <tr><%- data[0][0].dob %></tr>
+                                        <br>
+                                        <br>
+                                        <tr>Email:</tr>
+                                        <br>
+                                        <tr><%- data[0][0].email %></tr>
+                                        <br>
+                                        <br>
+                                        <tr>LinkedIn:</tr>
+                                        <br>
+                                        <tr><%- data[0][0].linkedin %></tr>
+                                        <br>
+                                        <br>
+                                        <tr>GitHub:</tr>
+                                        <br>
+                                        <tr><%- data[0][0].github %></tr>
+                                        <br>
+                                        <form action="/info/editGeneral" method="POST" float="right">
+                                            <input id="id" name="id" hidden value="<%= data[0][0].id %>" />
+                                            <button type="submit">Edit</button>
+                                        </form>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% ; %>
+                </div>
+                <% } else { %>
+                    <div class="container" style="padding-top: 10px">
+                        <form action="/info/addGeneral" method="POST">
+
+                            <label for="firstname">First Name</label>
+                            <input type="text" id="firstname" name="firstname" class="form-control" required />
+
+                            <label for="lastname">Last Name</label>
+                            <input type="text" id="lastname" name="lastname" class="form-control" required />
+
+                            <label for="dob">Birthday</label>
+                            <input type="date" id="dob" name="dob" class="form-control" />
+
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" required />
+
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="text" id="linkedin" name="linkedin" class="form-control" />
+
+                            <label for="github">GitHub</label>
+                            <input type="text" id="github" name="github" class="form-control" />
+
+                            <hr>
+
+                            <input type="submit" value="Add Info" class="btn btn-outline-light" style="float:right;" />
+                        </form>
+                        <% }%>
+                    </div>
+                    <br>
+                    <div class="container" style="padding-top: 20px">
+                        <form action="/info/addEducation" method="POST" id="education">
+                            <h2>Education</h2>
+
+                            <label for="school">School</label>
+                            <input type="text" id="school" name="school" class="form-control" required />
+
+                            <label for="degree">Degree</label>
+                            <input type="text" id="degree" name="degree" class="form-control" required />
+
+                            <label for="focus">Focus</label>
+                            <input type="text" id="focus" name="focus" class="form-control" />
+
+                            <label for="startdate">Start Date</label>
+                            <input type="date" id="startdate" name="startdate" class="form-control" required />
+
+                            <label for="enddate">End Date</label>
+                            <input type="date" id="enddate" name="enddate" class="form-control" required />
+
+                            <label for="description">Description</label>
+                            <input type="text" id="description" name="description" class="form-control" required />
+
+                            <hr>
+
+                            <input type="submit" value="Add Info" class="btn btn-outline-light" style="float:right;" />
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="container">
+                        <% data[1].forEach(function(item){ %>
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    <table>
+                                        <tbody>
+                                            <tr>School:</tr>
+                                            <br>
+                                            <tr><%- item.school %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Degree:</tr>
+                                            <br>
+                                            <tr><%- item.degree %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Focus:</tr>
+                                            <br>
+                                            <tr><%- item.focus %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Start Date:</tr>
+                                            <br>
+                                            <tr><%- item.startdate %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>End Date:</tr>
+                                            <br>
+                                            <tr><%- item.enddate %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Description:</tr>
+                                            <br>
+                                            <tr><%- item.description %></tr>
+                                            <br>
+                                            <form action="/info/editEducation" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Edit</button>
+                                            </form>
+                                            <form action="/info/rmEducation" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+
+                    <br>
+
+                    <div class="container">
+                        <form action="/info/addExperience" method="POST" id="experience">
+                            <h2>Experiences</h2>
+
+                            <label for="organization">Organization</label>
+                            <input type="text" id="organization" name="organization" class="form-control" required />
+
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" class="form-control" required />
+
+                            <label for="startdate">Start Date</label>
+                            <input type="date" id="startdate" name="startdate" class="form-control" required />
+
+                            <label for="enddate">End Date</label>
+                            <input type="date" id="enddate" name="enddate" class="form-control" required />
+
+                            <label for="description">Description</label>
+                            <input type="text" id="description" name="description" class="form-control" required />
+
+                            <hr>
+
+                            <input type="submit" value="Add Info" class="btn btn-outline-light" style="float:right;" />
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="container">
+                        <% data[2].forEach(function(item){ %>
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    <table>
+                                        <tbody>
+                                            <tr>Orginization:</tr>
+                                            <br>
+                                            <tr><%- item.organization %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Title:</tr>
+                                            <br>
+                                            <tr><%- item.title %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Start Date:</tr>
+                                            <br>
+                                            <tr><%- item.startdate %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>End Date:</tr>
+                                            <br>
+                                            <tr><%- item.enddate %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Description:</tr>
+                                            <br>
+                                            <tr><%- item.description %></tr>
+                                            <br>
+                                            <br>
+                                            <form action="/info/editExperience" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Edit</button>
+                                            </form>
+                                            <form action="/info/rmExperience" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+
+                    <br>
+                    <div class="container">
+                        <form action="/info/addSkill" method="POST" id="skills">
+                            <h2>Skills</h2>
+
+                            <label for="skill">Skill</label>
+                            <input type="text" id="skill" name="skill" class="form-control" required />
+
+                            <hr>
+
+                            <input type="submit" value="Add Info" class="btn btn-outline-light" style="float:right;" />
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="container">
+                        <% data[3].forEach(function(item){ %>
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    <table>
+                                        <tbody>
+                                            <tr>Skill:</tr>
+                                            <br>
+                                            <tr><%- item.skill %></tr>
+                                            <br>
+                                            <br>
+                                            <form action="/info/editSkill" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Edit</button>
+                                            </form>
+                                            <form action="/info/rmSkill" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="container">
+                        <form action="/info/addLanguage" method="POST" id="languages">
+                            <h2>Languages</h2>
+
+                            <label for="language">Language</label>
+                            <input type="text" id="language" name="language" class="form-control" required />
+
+                            <label for="proficiency">Proficiency</label>
+                            <input type="text" id="proficiency" name="proficiency" class="form-control" required />
+
+                            <hr>
+
+                            <input type="submit" value="Add Info" class="btn btn-outline-light" style="float:right;" />
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="container">
+                        <% data[4].forEach(function(item){ %>
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    <table>
+                                        <tbody>
+                                            <tr>Language:</tr>
+                                            <br>
+                                            <tr><%- item.language %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>Proficiency:</tr>
+                                            <br>
+                                            <tr><%- item.proficiency %></tr>
+                                            <br>
+                                            <br>
+                                            <form action="/info/editLanguage" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Edit</button>
+                                            </form>
+                                            <form action="/info/rmLanguage" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+
+                    <br>
+                    <div class="container">
+                    <form action="/info/addLocation" method="POST" id="locations">
+                        <h2>Location</h2>
+
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" class="form-control" required />
+
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" class="form-control" required />
+
+                        <hr>
+
+                        <input type="submit" value="Add Info" class="btn btn-outline-light" style="float:right;" />
+                    </form>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="container">
+                        <% data[5].forEach(function(item){ %>
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    <table>
+                                        <tbody>
+                                            <tr>Country:</tr>
+                                            <br>
+                                            <tr><%- item.country %></tr>
+                                            <br>
+                                            <br>
+                                            <tr>City:</tr>
+                                            <br>
+                                            <tr><%- item.city %></tr>
+                                            <br>
+                                            <br>
+                                            <form action="/info/editLocation" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Edit</button>
+                                            </form>
+                                            <form action="/info/rmLocation" method="POST" float="right">
+                                                <input id="id" name="id" hidden value="<%= item.id %>" />
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                    </div>
+            </main>
+
+            <%- include ('../partials/footer') %>

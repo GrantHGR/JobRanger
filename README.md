@@ -20,12 +20,15 @@ Version Control:
 Development Methodology:
 	
 Communication Plan:
-	Our team plans to utilize Discord to discuss meeting times, coordinate person-to-person workload, and 
+	Our team plans to utilize Discord to discuss meeting times, coordinate person-to-person workload, and complete future project milestones.
 
 Meeting Plan:
 	The TA meeting will be held every Monday at 3:45 PM. The scrum meeting will occur on Zoom from 4:00 PM to 5:00 PM on Monday as well. This will allow the members on the team to receive inputs directly from the TAs and move into development without any delay. 
 	
-Use Case Diagram:
+API Information:
+	Using a REST API from an official website of the United States Government which stores potential national job listings. We will be using the api/search/ endpoint which returns an array of objects containing jobs along with their respective attributes and descriptions.
 
-Wireframe:
+Website <https://developer.usajobs.gov/>
+API KEY <QYaokDz2ueAHu3iPkUCh8Zn7wBR11Hl0l7ruwzfGJ8U=>
+Email <granthargrav@gmail.com>
 

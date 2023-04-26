@@ -1,11 +1,12 @@
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users(
     username VARCHAR(50) PRIMARY KEY,
-    password VARCHAR(50) NOT NULL
+    password VARCHAR(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS general CASCADE;
 CREATE TABLE general(
+    id SERIAL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
     dob DATE NOT NULL,
@@ -23,17 +24,10 @@ CREATE TABLE educations(
     degree VARCHAR(50) NOT NULL,
     focus VARCHAR(50),
     startdate DATE NOT NULL,
-    endDate DATE NOT NULL,
+    enddate DATE NOT NULL,
+    description VARCHAR(1000) NOT NULL,
     username VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users (username)
-);
-
-DROP TABLE IF EXISTS educationDescriptions CASCADE;
-CREATE TABLE educationDescriptions(
-    id SERIAL PRIMARY KEY,
-    description VARCHAR(1000) NOT NULL,
-    education_id INT NOT NULL,
-    FOREIGN KEY (education_id) REFERENCES educations (id)
 );
 
 DROP TABLE IF EXISTS experiences CASCADE;
@@ -42,17 +36,10 @@ CREATE TABLE experiences(
     organization VARCHAR(50) NOT NULL,
     title VARCHAR(50) NOT NULL,
     startdate DATE NOT NULL,
-    endDate DATE NOT NULL,
+    enddate DATE NOT NULL,
+    description VARCHAR(1000) NOT NULL,
     username VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users (username)
-);
-
-DROP TABLE IF EXISTS experienceDescriptions CASCADE;
-CREATE TABLE experienceDescriptions(
-    id SERIAL PRIMARY KEY,
-    description VARCHAR(1000) NOT NULL,
-    experience_id INT NOT NULL,
-    FOREIGN KEY (experience_id) REFERENCES experiences (id)
 );
 
 DROP TABLE IF EXISTS skills CASCADE;
