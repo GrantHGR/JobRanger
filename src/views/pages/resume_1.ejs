@@ -13,9 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <h1 style="font-size:85px;"><center><%= result[0][0].firstname %> , <%= result[0][0].lastname %></center></h1>
+    <h1 style="font-size:85px; color:black;"><center><%= result[0][0].firstname %> , <%= result[0][0].lastname %></center></h1>
     <hr>
-    <h1 style= "font-size:20px;"><center><b>Github: </b><%= result[0][0].github %> || <b>LinkedIn: </b><%= result[0][0].linkedin %> || <b>Email: </b><%= result[0][0].email %> </center></h1>
+    <h1 style= "font-size:20px; color:black;"><center><b>Github: </b><%= result[0][0].github %> || <b>LinkedIn: </b><%= result[0][0].linkedin %> || <b>Email: </b><%= result[0][0].email %> </center></h1>
     <div class="divider"></div>
     <hr>
     <hr>
@@ -23,7 +23,7 @@
         <table class="striped">
           <thead>
             <tr>
-                <th><p style= "font-size:30px;">Education Background:</p1></th>
+                <th><p style= "font-size:30px; color:black;">Education Background:</p1></th>
                 <div class="divider"></div>
             </tr>
           </thead>
@@ -32,22 +32,22 @@
             <% result[1].forEach(educations =>{ %>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Institution: <%= educations.school %> </p>
+                  <p style= "font-size:20px; color:black;">Institution: <%= educations.school %> </p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Period of Enrollment: <%= educations.startdate %>~<%= educations.enddate %></p>
+                  <p style= "font-size:20px; color:black;">Period of Enrollment: <%= educations.startdate %>~<%= educations.enddate %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Field of Study: <%= educations.focus %></p>
+                  <p style= "font-size:20px; color:black;">Field of Study: <%= educations.focus %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Description: <%= educations.description %></p>
+                  <p style= "font-size:20px; color:black;">Description: <%= educations.description %></p>
                 </td>
               </tr>   
           <%}) %> 
@@ -59,7 +59,7 @@
         <table class="striped">
           <thead>
             <tr>
-                <th><p style= "font-size:30px;">Experiences:</p1></th>
+                <th><p style= "font-size:30px; color:black;">Experiences:</p1></th>
             </tr>
           </thead>
 
@@ -67,22 +67,22 @@
             <% result[2].forEach(experiences =>{ %>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Organization: <%= experiences.organization %></p>
+                  <p style= "font-size:20px; color:black;">Organization: <%= experiences.organization %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Duration: <%= experiences.startdate %> ~ <%= experiences.endDate %></p>
+                  <p style= "font-size:20px; color:black;">Duration: <%= experiences.startdate %> ~ <%= experiences.endDate %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Position: <%= experiences.title %></p>
+                  <p style= "font-size:20px; color:black;">Position: <%= experiences.title %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Description: <%= experiences.description %></p>
+                  <p style= "font-size:20px; color:black;">Description: <%= experiences.description %></p>
                 </td>
               </tr>      
             <%}) %> 
@@ -96,7 +96,7 @@
           <table class="striped">
             <thead>
               <tr>
-                  <th><p style= "font-size:30px;">Skills and Proficency:</p1></th>
+                  <th><p style= "font-size:30px; color:black;">Skills and Proficency:</p1></th>
               </tr>
             </thead>
   
@@ -104,7 +104,7 @@
               <% result[3].forEach(skills =>{ %>
                 <tr>
                   <td>
-                    <p style= "font-size:20px;">Description: <%= skills.skill %></p>
+                    <p style= "font-size:20px; color:black;">Description: <%= skills.skill %></p>
                   </td>
                 </tr>      
               <%}) %> 
@@ -119,7 +119,7 @@
           <table class="striped">
             <thead>
               <tr>
-                  <th><p style= "font-size:30px;">Languages:</p1></th>
+                  <th><p style= "font-size:30px; color:black;">Languages:</p1></th>
               </tr>
             </thead>
   
@@ -127,12 +127,12 @@
               <% result[4].forEach(languages =>{ %>
                 <tr>
                   <td>
-                    <p style= "font-size:20px;">Language: <%= languages.language %></p>
+                    <p style= "font-size:20px; color:black;">Language: <%= languages.language %></p>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <p style= "font-size:20px;">Proficiency: <%= languages.proficiency %></p>
+                    <p style= "font-size:20px; color:black;">Proficiency: <%= languages.proficiency %></p>
                   </td>
                 </tr>      
               <%}) %> 

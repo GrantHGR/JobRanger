@@ -74,7 +74,6 @@ app.get('/login', (req, res) => {
     res.render("pages/login");
 });
 
-<<<<<<< HEAD
 app.get('/home', (req, res) => {
   res.render("pages/home")
 })
@@ -83,8 +82,7 @@ app.get('/discover', (req, res) => {
   res.render("pages/jobSearch")
 })
 
-=======
->>>>>>> 863d54af7c791f0a80098aa2d5921401b105aea6
+
 app.post('/login', async (req, res) => {
     const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
 
