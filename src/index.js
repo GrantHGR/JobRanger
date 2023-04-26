@@ -612,21 +612,18 @@ app.get('/template', async (req,res) => {
 
 
 
-var host = 'data.usajobs.gov';  
-// var userAgent = 'grant.hargrav@gmail.com';  
-var userAgent = 'nepalprajwal122@gmail.com'; 
-// var authKey = 'QYaokDz2ueAHu3iPkUCh8Zn7wBR11Hl0l7ruwzfGJ8U='; 
-var authKey = 'eqZopqznQlnIvQF9cj3OgQNjqO9fY/n+0llgOg5SvPE='; 
+
 
 
 app.get('/discover' ,(req,res) =>{
+  const query = "SELCT FROM "
   axios({      
       url: 'https://data.usajobs.gov/api/search?JobCategoryCode=2210&Keyword=Software Development&LocationName=Washington, DC',      
       method: 'GET',      
       headers: {          
-          "Host": host,          
-          "User-Agent": userAgent,          
-          "Authorization-Key": authKey      
+          "Host": HOST,          
+          "User-Agent": USERAGENT,          
+          "Authorization-Key": AUTHKEY      
       }  
   })
   .then(results => {
