@@ -12,14 +12,25 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    
+    <script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+    <script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
+    
+    <div id="resumeInfo">
     <h1 style="font-size:85px; color:black;"><center><%= result[0][0].firstname %> , <%= result[0][0].lastname %></center></h1>
     <hr>
     <h1 style= "font-size:20px; color:black;"><center><b>Github: </b><%= result[0][0].github %> || <b>LinkedIn: </b><%= result[0][0].linkedin %> || <b>Email: </b><%= result[0][0].email %> </center></h1>
     <div class="divider"></div>
     <hr>
     <hr>
-    <div id = "resume">
+    <div id = "resume" style="padding-left: 30px;">
         <table class="striped">
           <thead>
             <tr>
@@ -45,7 +56,11 @@
                   <p style= "font-size:20px; color:black;">Field of Study: <%= educations.focus %></p>
                 </td>
               </tr>
+              <% if (result[1][result[1].length-1] == educations) {%>
               <tr>
+              <% } else { %>
+              <tr style="border-bottom: 1px solid black;">
+              <%}%>
                 <td>
                   <p style= "font-size:20px; color:black;">Description: <%= educations.description %></p>
                 </td>
@@ -80,7 +95,11 @@
                   <p style= "font-size:20px; color:black;">Position: <%= experiences.title %></p>
                 </td>
               </tr>
+              <% if (result[2][result[2].length-1] == experiences) {%>
               <tr>
+              <% } else { %>
+              <tr style="border-bottom: 1px solid black;">
+              <%}%>
                 <td>
                   <p style= "font-size:20px; color:black;">Description: <%= experiences.description %></p>
                 </td>
@@ -102,7 +121,11 @@
   
             <tbody>
               <% result[3].forEach(skills =>{ %>
-                <tr>
+                <% if (result[3][0] == skills) {%>
+                  <tr>
+                  <% } else { %>
+                  <tr style="border-top: 1px solid black;">
+                  <%}%>
                   <td>
                     <p style= "font-size:20px; color:black;">Description: <%= skills.skill %></p>
                   </td>
@@ -125,7 +148,11 @@
   
             <tbody>
               <% result[4].forEach(languages =>{ %>
-                <tr>
+                <% if (result[4][0] == languages) {%>
+                  <tr>
+                  <% } else { %>
+                  <tr style="border-top: 1px solid black;">
+                  <%}%>
                   <td>
                     <p style= "font-size:20px; color:black;">Language: <%= languages.language %></p>
                   </td>
@@ -140,18 +167,33 @@
           </table>  
         </div> 
     </div>
-
+  </div>
     <center>
-    <script src="https://cdn.convertapi.com/button.js" data-secret="UtvKiW96I5DHVsWe"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.convertapi.com/button.css">
-    <button class="convertapi-btn">Save page as PDF</button>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+      <button class="btn btn-primary btn-lg" id="cmd" onclick="convertHTMLtoPDF()">Generate PDF</button>
     </center>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 <br>
 <br>
 <br>
 
 </main>
+
+<script type="text/javascript">
+  function convertHTMLtoPDF() {
+      const { jsPDF } = window.jspdf;
+
+      var doc = new jsPDF('l', 'mm', [1500,1400]);
+      var pdfjs = document.querySelector('#resumeInfo');
+
+      doc.html(pdfjs, {
+          callback: function(doc) {
+              doc.save("resume.pdf");
+          },
+          x: 12,
+          y: 12
+      });
+  }          
+</script>   
 <%- include ('../partials/footer') %>
