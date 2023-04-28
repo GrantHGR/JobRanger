@@ -1,0 +1,24 @@
+Release Notes:
+
+0.1.0
+	Login and register
+	Staging for ejs pages
+0.1.1
+	Created sql databases
+0.1.2
+	Created UATs
+	Created demo user
+0.1.3
+	Created pdf export feature
+0.1.4
+	Created API calls for external API
+0.1.5
+	Added partials to pages
+0.1.6
+	Fixed minor bugs
+0.2.0
+	Integrated UI and functional aspects
+0.2.1
+	Fixed bugs 
+0.2.2
+	Deployed page to cloud
