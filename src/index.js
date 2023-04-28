@@ -78,9 +78,7 @@ app.get('/home', (req, res) => {
   res.render("pages/home")
 })
 
-app.get('/discover', (req, res) => {
-  res.render("pages/discover")
-})
+
 
 app.post('/login', async (req, res) => {
     const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
@@ -95,7 +93,7 @@ app.post('/login', async (req, res) => {
           req.session.user = user;
           req.session.save();
 
-          res.redirect(200, '/home');
+          res.redirect('/home');
         } else {
           res.locals.message = 'Incorrect username or password.';
           res.status(200).render("pages/login");
@@ -622,26 +620,40 @@ app.get('/template', async (req,res) => {
 
 
 
-app.get('/discover' ,(req,res) =>{
-  const query = "SELCT FROM "
-  axios({      
-      url: 'https://data.usajobs.gov/api/search?JobCategoryCode=2210&Keyword=Software Development&LocationName=Washington, DC',      
-      method: 'GET',      
-      headers: {          
-          "Host": HOST,          
-          "User-Agent": USERAGENT,          
-          "Authorization-Key": AUTHKEY      
-      }  
+app.get('/discover' , async (req,res) =>{
+  const getSkills = `SELECT * FROM skills WHERE username = '${user.username}'`;
+  db.any(getSkills)
+  .then(function(skills){
+    // console.log(skills)
+    // console.log(skills[0].skill)
+   // console.log(skills[0][1])
+    // console.log("getSkills should hav ebeen printed")
+    axios({      
+        url: `https://data.usajobs.gov/api/search?JobCategoryCode=2210&Keyword=${skills[1].skill}`,      
+        method: 'GET',      
+        headers: {          
+            "Host": process.env.HOST,          
+            "User-Agent": process.env.USERAGENT,          
+            "Authorization-Key": process.env.AUTHKEY      
+        }  
+    })
+    .then(results => {
+      console.log(results) 
+      data =  results.data.SearchResult.SearchResultItems; 
+     // console.log(data)
+      res.render('pages/discover',{data:data})
+
+    })
+    .catch(error => {
+      console.log(error)
+      res.render('pages/home',{message:"Something went wrong"});
+    });
   })
-  .then(results => {
-    console.log(results.data) 
-    var data =  results.data.SearchResult.SearchResultItems; 
-    res.render('pages/discover',{data:data})
-  })
-  .catch(error => {
+  .catch(error =>{
     console.log(error)
     res.render('pages/home',{message:"Something went wrong"});
-  });
+  })
+  
   
 });
 
