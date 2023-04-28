@@ -71,17 +71,8 @@ app.get('/', (req, res) => {
 });
   
 app.get('/login', (req, res) => {
-    res.render("pages/login");
+    res.render("pages/login", {unauth: true,});
 });
-
-app.get('/home', (req, res) => {
-  res.render("pages/home")
-})
-
-app.get('/discover', (req, res) => {
-  res.render("pages/jobSearch")
-})
-
 
 app.post('/login', async (req, res) => {
     const access = `SELECT * FROM users WHERE username = '${req.body.username}';`;
@@ -96,38 +87,37 @@ app.post('/login', async (req, res) => {
           req.session.user = user;
           req.session.save();
 
-          res.redirect(200, '/home');
+          res.redirect('/home');
         } else {
           res.locals.message = 'Incorrect username or password';
-          res.status(200).render("pages/login");
+          res.status(200).render("pages/login", {unauth: true,});
         }
       })
       .catch(err => {
         res.locals.message = 'Incorrect username or password';
-        res.status(200).render("pages/login");
+        res.status(200).render("pages/login", {unauth: true,});
       });
 });
 
 app.get('/register', (req, res) => {
-    res.render('pages/register');
+    res.render('pages/register', {unauth: true,});
 });
 
 app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = await bcrypt.hash(req.body.password, 10);
     const insert = `INSERT INTO users (username, password) VALUES ('${username}', '${password}');`;
-console.log("paosdp");
-    console.log(password);
+
     db.task('get-everything', task => {
         return task.any(insert);
     })
         .then(data => {
-          res.redirect(200, '/login');
+          res.redirect(200, "/login", {unauth: true,});
         })
         .catch(err => {
           console.log(err);
           res.locals.message = 'Username already exists';
-          res.status(200).render("pages/register");
+          res.status(200).render("pages/register", {unauth: true,});
         });
 });
 
@@ -146,7 +136,11 @@ app.get('/logout', (req, res) => {
   req.session.user = user;
   req.session.save();
   res.locals.message = 'Logged out successfully';
-  res.render("pages/login");
+  res.render("pages/login", {unauth: true,});
+});
+
+app.get('/home', (req, res) => {
+  res.render("pages/home");
 });
 
 const getData = async () => {
