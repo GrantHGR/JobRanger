@@ -1,5 +1,3 @@
-Sure, here's the updated README file:
-
 # JobRangers
 
 JobRangers is a powerful tool for those looking to create impressive resumes and find relevant job opportunities. Our vision is to empower users to present their skills and experiences in the best possible light and connect them with the perfect match for their personalities. Our ultimate goal is to help job seekers land their dream job by providing them with the tools and resources they need to succeed. Whether users are just starting their careers or looking for a new opportunity, JobRangers is the app that will give them a competitive edge in the current job market.
