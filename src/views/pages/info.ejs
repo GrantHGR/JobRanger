@@ -49,7 +49,7 @@
                                         <br>
                                         <form action="/info/editGeneral" method="POST" float="right">
                                             <input id="id" name="id" hidden value="<%= data[0][0].id %>" />
-                                            <button type="submit">Edit</button>
+                                            <button class="btn btn-outline-light" type="submit">Edit</button>
                                         </form>
                                 </tbody>
                             </table>
@@ -58,7 +58,7 @@
                     <% ; %>
                 </div>
                 <% } else { %>
-                    <div class="container" style="padding-top: 10px">
+                    <div class="container" style="padding-top: 10px; background-color: #808080;">
                         <form action="/info/addGeneral" method="POST">
 
                             <label for="firstname">First Name</label>
@@ -86,7 +86,7 @@
                         <% }%>
                     </div>
                     <br>
-                    <div class="container" style="padding-top: 20px">
+                    <div class="container" style="padding-top: 20px;">
                         <form action="/info/addEducation" method="POST" id="education">
                             <h2>Education</h2>
 
@@ -118,7 +118,7 @@
                     <br>
                     <div class="container">
                         <% data[1].forEach(function(item){ %>
-                            <div class="card" style="width: 100%">
+                            <div class="card" style="width: 100%; background-color: #808080;">
                                 <div class="card-body">
                                     <table>
                                         <tbody>
@@ -153,11 +153,11 @@
                                             <br>
                                             <form action="/info/editEducation" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Edit</button>
+                                                <button class="btn btn-outline-light" type="submit">Edit</button>
                                             </form>
                                             <form action="/info/rmEducation" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Delete</button>
+                                                <button class="btn btn-outline-light" type="submit">Delete</button>
                                             </form>
                                         </tbody>
                                     </table>
@@ -197,7 +197,7 @@
                     <br>
                     <div class="container">
                         <% data[2].forEach(function(item){ %>
-                            <div class="card" style="width: 100%">
+                            <div class="card" style="width: 100%; background-color: #808080;">
                                 <div class="card-body">
                                     <table>
                                         <tbody>
@@ -228,11 +228,11 @@
                                             <br>
                                             <form action="/info/editExperience" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Edit</button>
+                                                <button class="btn btn-outline-light" type="submit">Edit</button>
                                             </form>
                                             <form action="/info/rmExperience" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Delete</button>
+                                                <button class="btn btn-outline-light" type="submit">Delete</button>
                                             </form>
                                         </tbody>
                                     </table>
@@ -259,7 +259,7 @@
                     <br>
                     <div class="container">
                         <% data[3].forEach(function(item){ %>
-                            <div class="card" style="width: 100%">
+                            <div class="card" style="width: 100%; background-color: #808080;">
                                 <div class="card-body">
                                     <table>
                                         <tbody>
@@ -270,11 +270,11 @@
                                             <br>
                                             <form action="/info/editSkill" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Edit</button>
+                                                <button class="btn btn-outline-light" type="submit">Edit</button>
                                             </form>
                                             <form action="/info/rmSkill" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Delete</button>
+                                                <button class="btn btn-outline-light" type="submit">Delete</button>
                                             </form>
                                         </tbody>
                                     </table>
@@ -305,7 +305,7 @@
                     <br>
                     <div class="container">
                         <% data[4].forEach(function(item){ %>
-                            <div class="card" style="width: 100%">
+                            <div class="card" style="width: 100%; background-color: #808080;">
                                 <div class="card-body">
                                     <table>
                                         <tbody>
@@ -321,11 +321,11 @@
                                             <br>
                                             <form action="/info/editLanguage" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Edit</button>
+                                                <button class="btn btn-outline-light" type="submit">Edit</button>
                                             </form>
                                             <form action="/info/rmLanguage" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Delete</button>
+                                                <button class="btn btn-outline-light" type="submit">Delete</button>
                                             </form>
                                         </tbody>
                                     </table>
@@ -355,7 +355,7 @@
                     <br>
                     <div class="container">
                         <% data[5].forEach(function(item){ %>
-                            <div class="card" style="width: 100%">
+                            <div class="card" style="width: 100%; background-color: #808080;">
                                 <div class="card-body">
                                     <table>
                                         <tbody>
@@ -371,11 +371,11 @@
                                             <br>
                                             <form action="/info/editLocation" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Edit</button>
+                                                <button class="btn btn-outline-light" type="submit">Edit</button>
                                             </form>
                                             <form action="/info/rmLocation" method="POST" float="right">
                                                 <input id="id" name="id" hidden value="<%= item.id %>" />
-                                                <button type="submit">Delete</button>
+                                                <button class="btn btn-outline-light" type="submit">Delete</button>
                                             </form>
                                         </tbody>
                                     </table>

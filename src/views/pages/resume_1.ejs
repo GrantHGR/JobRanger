@@ -8,22 +8,33 @@
   p {font-family: Cambria;}
 </style>
 
-  <main>
+  <main style="background: #ffffff; color:black;">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <h1 style="font-size:85px;"><center><%= result[0][0].firstname %> , <%= result[0][0].lastname %></center></h1>
+    
+    <script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+    <script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
+    
+    <div id="resumeInfo">
+    <h1 style="font-size:85px; color:black;"><center><%= result[0][0].firstname %> , <%= result[0][0].lastname %></center></h1>
     <hr>
-    <h1 style= "font-size:20px;"><center><b>Github: </b><%= result[0][0].github %> || <b>LinkedIn: </b><%= result[0][0].linkedin %> || <b>Email: </b><%= result[0][0].email %> </center></h1>
+    <h1 style= "font-size:20px; color:black;"><center><b>Github: </b><%= result[0][0].github %> || <b>LinkedIn: </b><%= result[0][0].linkedin %> || <b>Email: </b><%= result[0][0].email %> </center></h1>
     <div class="divider"></div>
     <hr>
     <hr>
-    <div id = "resume">
+    <div id = "resume" style="padding-left: 30px;">
         <table class="striped">
           <thead>
             <tr>
-                <th><p style= "font-size:30px;">Education Background:</p1></th>
+                <th><p style= "font-size:30px; color:black;">Education Background:</p1></th>
                 <div class="divider"></div>
             </tr>
           </thead>
@@ -32,22 +43,26 @@
             <% result[1].forEach(educations =>{ %>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Institution: <%= educations.school %> </p>
+                  <p style= "font-size:20px; color:black;">Institution: <%= educations.school %> </p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Period of Enrollment: <%= educations.startdate %>~<%= educations.enddate %></p>
+                  <p style= "font-size:20px; color:black;">Period of Enrollment: <%= educations.startdate %>~<%= educations.enddate %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Field of Study: <%= educations.focus %></p>
+                  <p style= "font-size:20px; color:black;">Field of Study: <%= educations.focus %></p>
                 </td>
               </tr>
+              <% if (result[1][result[1].length-1] == educations) {%>
               <tr>
+              <% } else { %>
+              <tr style="border-bottom: 1px solid black;">
+              <%}%>
                 <td>
-                  <p style= "font-size:20px;">Description: <%= educations.description %></p>
+                  <p style= "font-size:20px; color:black;">Description: <%= educations.description %></p>
                 </td>
               </tr>   
           <%}) %> 
@@ -59,7 +74,7 @@
         <table class="striped">
           <thead>
             <tr>
-                <th><p style= "font-size:30px;">Experiences:</p1></th>
+                <th><p style= "font-size:30px; color:black;">Experiences:</p1></th>
             </tr>
           </thead>
 
@@ -67,22 +82,26 @@
             <% result[2].forEach(experiences =>{ %>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Organization: <%= experiences.organization %></p>
+                  <p style= "font-size:20px; color:black;">Organization: <%= experiences.organization %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Duration: <%= experiences.startdate %> ~ <%= experiences.endDate %></p>
+                  <p style= "font-size:20px; color:black;">Duration: <%= experiences.startdate %> ~ <%= experiences.endDate %></p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p style= "font-size:20px;">Position: <%= experiences.title %></p>
+                  <p style= "font-size:20px; color:black;">Position: <%= experiences.title %></p>
                 </td>
               </tr>
+              <% if (result[2][result[2].length-1] == experiences) {%>
               <tr>
+              <% } else { %>
+              <tr style="border-bottom: 1px solid black;">
+              <%}%>
                 <td>
-                  <p style= "font-size:20px;">Description: <%= experiences.description %></p>
+                  <p style= "font-size:20px; color:black;">Description: <%= experiences.description %></p>
                 </td>
               </tr>      
             <%}) %> 
@@ -96,15 +115,19 @@
           <table class="striped">
             <thead>
               <tr>
-                  <th><p style= "font-size:30px;">Skills and Proficency:</p1></th>
+                  <th><p style= "font-size:30px; color:black;">Skills and Proficency:</p1></th>
               </tr>
             </thead>
   
             <tbody>
               <% result[3].forEach(skills =>{ %>
-                <tr>
+                <% if (result[3][0] == skills) {%>
+                  <tr>
+                  <% } else { %>
+                  <tr style="border-top: 1px solid black;">
+                  <%}%>
                   <td>
-                    <p style= "font-size:20px;">Description: <%= skills.skill %></p>
+                    <p style= "font-size:20px; color:black;">Description: <%= skills.skill %></p>
                   </td>
                 </tr>      
               <%}) %> 
@@ -119,20 +142,24 @@
           <table class="striped">
             <thead>
               <tr>
-                  <th><p style= "font-size:30px;">Languages:</p1></th>
+                  <th><p style= "font-size:30px; color:black;">Languages:</p1></th>
               </tr>
             </thead>
   
             <tbody>
               <% result[4].forEach(languages =>{ %>
-                <tr>
+                <% if (result[4][0] == languages) {%>
+                  <tr>
+                  <% } else { %>
+                  <tr style="border-top: 1px solid black;">
+                  <%}%>
                   <td>
-                    <p style= "font-size:20px;">Language: <%= languages.language %></p>
+                    <p style= "font-size:20px; color:black;">Language: <%= languages.language %></p>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <p style= "font-size:20px;">Proficiency: <%= languages.proficiency %></p>
+                    <p style= "font-size:20px; color:black;">Proficiency: <%= languages.proficiency %></p>
                   </td>
                 </tr>      
               <%}) %> 
@@ -140,18 +167,33 @@
           </table>  
         </div> 
     </div>
-
+  </div>
     <center>
-    <script src="https://cdn.convertapi.com/button.js" data-secret="UtvKiW96I5DHVsWe"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.convertapi.com/button.css">
-    <button class="convertapi-btn">Save page as PDF</button>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+      <button class="btn btn-primary btn-lg" id="cmd" onclick="convertHTMLtoPDF()">Generate PDF</button>
     </center>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 <br>
 <br>
 <br>
 
 </main>
+
+<script type="text/javascript">
+  function convertHTMLtoPDF() {
+      const { jsPDF } = window.jspdf;
+
+      var doc = new jsPDF('l', 'mm', [1500,1400]);
+      var pdfjs = document.querySelector('#resumeInfo');
+
+      doc.html(pdfjs, {
+          callback: function(doc) {
+              doc.save("resume.pdf");
+          },
+          x: 12,
+          y: 12
+      });
+  }          
+</script>   
 <%- include ('../partials/footer') %>
