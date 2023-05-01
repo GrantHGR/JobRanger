@@ -24,13 +24,14 @@
     </script>
     
     <div id="resumeInfo">
-    <h1 style="font-size:85px; color:black;"><center><%= result[0][0].firstname %> , <%= result[0][0].lastname %></center></h1>
+    <h1 style="font-size:85px; color:black;"><center><%= result[0][0].lastname %> , <%= result[0][0].firstname %></center></h1>
     <hr>
     <h1 style= "font-size:20px; color:black;"><center><b>Github: </b><%= result[0][0].github %> || <b>LinkedIn: </b><%= result[0][0].linkedin %> || <b>Email: </b><%= result[0][0].email %> </center></h1>
     <div class="divider"></div>
     <hr>
     <hr>
     <div id = "resume" style="padding-left: 30px;">
+      <br>
         <table class="striped">
           <thead>
             <tr>
@@ -69,12 +70,14 @@
           </tbody>
         </table> 
         <hr>
+
         <div class="divider"></div>
+        <br>
 
         <table class="striped">
           <thead>
             <tr>
-                <th><p style= "font-size:30px; color:black;">Experiences:</p1></th>
+                <th><p style= "font-size:30px; color:black;">Experience/Work History:</p1></th>
             </tr>
           </thead>
 
@@ -111,6 +114,8 @@
   
         <div class="divider"></div>
 
+        <br>
+
         <div id = "skills">
           <table class="striped">
             <thead>
@@ -127,7 +132,7 @@
                   <tr style="border-top: 1px solid black;">
                   <%}%>
                   <td>
-                    <p style= "font-size:20px; color:black;">Description: <%= skills.skill %></p>
+                    <p style= "font-family:Cambria; font-size:20px; color:black;">Skill Description: <%= skills.skill %></p>
                   </td>
                 </tr>      
               <%}) %> 
@@ -137,12 +142,14 @@
       <hr>
       
         <div class="divider"></div>
-        
+
+        <br>
+
         <div id = "languages">
           <table class="striped">
             <thead>
               <tr>
-                  <th><p style= "font-size:30px; color:black;">Languages:</p1></th>
+                  <th><p style= "font-size:30px; color:black;">Proficient Languages:</p1></th>
               </tr>
             </thead>
   
@@ -154,7 +161,7 @@
                   <tr style="border-top: 1px solid black;">
                   <%}%>
                   <td>
-                    <p style= "font-size:20px; color:black;">Language: <%= languages.language %></p>
+                    <p style= "font-size:20px; color:black;">Languages: <%= languages.language %></p>
                   </td>
                 </tr>
                 <tr>
