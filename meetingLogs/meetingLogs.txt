@@ -17,3 +17,22 @@
         Sang: made a template for pdfs; will make a print functionality.
     TODO:
         add bookmarks page (icebox idea)
+
+04/24/23
+    TASKS:
+        Max: made add/rm/edit/update APIs; will fix bugs, help Sang with template page. 
+        Prajwal/Grant: connected with USAJobs API; will connect to database to add parameters, make discover page.
+        Gerardo: made login/register/home/discover pages; will integrate style with other pages.
+        Sam: made UATs for several APIs, displayed data to info page; will work on fixing errors. 
+        Sang: started resume page; will finalize pdf.
+    TODO:
+        finish project, create presentation
+
+05/01/23
+    TASKS:
+        Max: modified menu bar, created wireframe/use case diagram
+        Prajwal/Grant: made discover page and functionality, made project presentation
+        Gerardo: integrated UI for entire project
+        Sam: fixed bugs across project, made project report
+    TODO:
+        presentation
