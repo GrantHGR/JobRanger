@@ -9,7 +9,7 @@ CREATE TABLE general(
     id SERIAL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
-    dob DATE NOT NULL,
+    dob VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     linkedin VARCHAR(100),
     github VARCHAR(100),
