@@ -23,8 +23,8 @@ CREATE TABLE educations(
     school VARCHAR(50) NOT NULL,
     degree VARCHAR(50) NOT NULL,
     focus VARCHAR(50),
-    startdate DATE NOT NULL,
-    enddate DATE NOT NULL,
+    startdate VARCHAR(50) NOT NULL,
+    enddate VARCHAR(50) NOT NULL,
     description VARCHAR(1000) NOT NULL,
     username VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users (username)
@@ -35,8 +35,8 @@ CREATE TABLE experiences(
     id SERIAL PRIMARY KEY,
     organization VARCHAR(50) NOT NULL,
     title VARCHAR(50) NOT NULL,
-    startdate DATE NOT NULL,
-    enddate DATE NOT NULL,
+    startdate VARCHAR(50) NOT NULL,
+    enddate VARCHAR(50) NOT NULL,
     description VARCHAR(1000) NOT NULL,
     username VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users (username)
