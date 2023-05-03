@@ -70,6 +70,28 @@ app.get('/', (req, res) => {
     res.redirect('/login');
 });
   
+app.get('/register', (req, res) => {
+  res.render('pages/register', {unauth: true,});
+});
+
+app.post('/register', async (req, res) => {
+  const username = req.body.username;
+  const password = await bcrypt.hash(req.body.password, 10);
+  const insert = `INSERT INTO users (username, password) VALUES ('${username}', '${password}');`;
+
+  db.task('get-everything', task => {
+      return task.any(insert);
+  })
+      .then(data => {
+        res.redirect("pages/login");
+      })
+      .catch(err => {
+        console.log(err);
+        res.locals.message = 'Username already exists';
+        res.render("pages/register", {unauth: true,});
+      });
+});
+
 app.get('/login', (req, res) => {
     res.render("pages/login", {unauth: true,});
 });
@@ -97,28 +119,6 @@ app.post('/login', async (req, res) => {
         res.locals.message = 'Incorrect username or password';
         res.status(200).render("pages/login", {unauth: true,});
       });
-});
-
-app.get('/register', (req, res) => {
-    res.render('pages/register', {unauth: true,});
-});
-
-app.post('/register', async (req, res) => {
-    const username = req.body.username;
-    const password = await bcrypt.hash(req.body.password, 10);
-    const insert = `INSERT INTO users (username, password) VALUES ('${username}', '${password}');`;
-
-    db.task('get-everything', task => {
-        return task.any(insert);
-    })
-        .then(data => {
-          res.redirect(200, "/login", {unauth: true,});
-        })
-        .catch(err => {
-          console.log(err);
-          res.locals.message = 'Username already exists';
-          res.status(200).render("pages/register", {unauth: true,});
-        });
 });
 
 const auth = (req, res, next) => {
@@ -171,7 +171,7 @@ app.get('/info', async (req, res) => {
 app.post('/info/addGeneral', async (req, res) => {
   const add = `INSERT INTO general (firstname, lastname, dob, email, linkedin, github, username) SELECT '${req.body.firstname}', '${req.body.lastname}', '${req.body.dob}', '${req.body.email}', '${req.body.linkedin}', '${req.body.github}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM general WHERE username = '${user.username}');`;
   db.task('get-everything', task => {
-    return task.one(add);
+    return task.any(add);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -227,7 +227,7 @@ app.post('/info/updateGeneral', async (req, res) => {
 app.post('/info/addEducation', async (req, res) => {
   const add = `INSERT INTO educations (school, degree, focus, startdate, enddate, description, username) SELECT '${req.body.school}', '${req.body.degree}', '${req.body.focus}', '${req.body.startdate}', '${req.body.enddate}', '${req.body.description}', '${user.username}' WHERE NOT EXISTS (SELECT * FROM educations WHERE school = '${req.body.school}' AND degree = '${req.body.degree}' AND focus = '${req.body.focus}' AND username = '${user.username}');`;
   db.task('get-everything', task => {
-    return task.one(add);
+    return task.any(add);
   })
     .then(async data => {
       res.render("pages/info", {
@@ -236,6 +236,7 @@ app.post('/info/addEducation', async (req, res) => {
       });
     })
     .catch(async err => {
+      console.log(err);
       res.render("pages/info", {
         data: await getData(),
         message: "Failed to add education",
@@ -246,7 +247,7 @@ app.post('/info/addEducation', async (req, res) => {
 app.post('/info/editEducation', async (req, res) => {
   const edit = `SELECT * FROM educations WHERE id = '${req.body.id}';`;
   db.task('get-everything', task => {
-    return task.one(edit);
+    return task.any(edit);
   })
     .then(async data => {
       res.render("pages/edit", {
@@ -304,7 +305,7 @@ app.post('/info/addExperience', async (req, res) => {
   const add = `INSERT INTO experiences (organization, title, startdate, enddate, description, username) SELECT '${req.body.organization}', '${req.body.title}', '${req.body.startdate}', '${req.body.enddate}', '${req.body.description}','${user.username}' WHERE NOT EXISTS (SELECT * FROM experiences WHERE organization = '${req.body.organization}' AND title = '${req.body.title}' AND username = '${user.username}');`;
 
   db.task('get-everything', task => {
-    return task.one(add);
+    return task.any(add);
   })
     .then(async data => {
       res.render("pages/info", {
